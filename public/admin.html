@@ -1,0 +1,1675 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <base href="/">
+  <title>Knowledge Garden Admin Dashboard</title>
+  <meta name="description" content="Administrative dashboard for Knowledge Garden IoT learning platform">
+  <link rel="icon" type="image/png" href="logo.jpeg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script>window.API_BASE = window.API_BASE ?? '';</script>
+  <style>
+    :root{
+      --navy:#0A2E6F;
+      --mag:#FF2B7A;
+      --muted:#6b7280;
+      --border:#e5e7eb;
+      --bg:#f8fafc;
+      --success:#10b981;
+      --warning:#f59e0b;
+      --error:#ef4444;
+      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+      --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,body{
+      margin:0;
+      font-family:'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      color:#111827;
+      background:var(--bg);
+      line-height: 1.6;
+    }
+
+    /* Enhanced background */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background:
+        radial-gradient(600px 400px at 80% 10%, rgba(10,46,111,.08), transparent 50%),
+        radial-gradient(400px 300px at 20% 80%, rgba(255,43,122,.06), transparent 50%),
+        var(--bg);
+      animation: backgroundShift 15s ease-in-out infinite;
+    }
+
+    @keyframes backgroundShift {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.8; }
+    }
+
+    /* Enhanced header bar */
+    .bar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:16px 24px;
+      border-bottom:1px solid var(--border);
+      position:sticky;
+      top:0;
+      background:rgba(255,255,255,0.95);
+      backdrop-filter: blur(10px);
+      z-index:50;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      color:var(--navy);
+      font-weight:800;
+      font-size: 20px;
+      text-decoration: none;
+    }
+
+    .brand img{
+      width:36px;
+      height:36px;
+      border-radius:10px;
+      object-fit:cover;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.3s ease;
+    }
+
+    .brand:hover img {
+      transform: scale(1.05);
+    }
+
+    .bar .actions{
+      display:flex;
+      gap:12px;
+      align-items: center;
+    }
+
+    /* Enhanced buttons */
+    .btn{
+      border:1px solid var(--border);
+      background:#f8fafc;
+      border-radius:12px;
+      padding:10px 16px;
+      cursor:pointer;
+      font-weight:600;
+      font-size: 14px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.3s ease;
+      color: var(--navy);
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-md);
+      background: #f1f5f9;
+    }
+
+    .btn.primary{
+      background:linear-gradient(135deg,var(--navy),var(--mag));
+      color:#fff;
+      border:none;
+      box-shadow: var(--shadow-md);
+    }
+
+    .btn.primary:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .btn.danger{
+      background:#fef2f2;
+      border-color:#fecaca;
+      color:#dc2626;
+    }
+
+    .btn.danger:hover {
+      background: #fee2e2;
+      border-color: #fca5a5;
+    }
+
+    .btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* Enhanced grid layout */
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(500px, 1fr));
+      gap:24px;
+      max-width:1400px;
+      margin:24px auto;
+      padding:0 24px;
+    }
+
+    @media (max-width:1024px){
+      .grid{
+        grid-template-columns:1fr;
+        padding: 0 16px;
+      }
+    }
+        /* Enhanced grid layout */
+    .grid{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:24px;
+      max-width:1400px;
+      margin:24px auto;
+      padding:0 24px;
+    }
+
+    @media (max-width:1024px){
+      .grid{
+        grid-template-columns:1fr;
+        padding: 0 16px;
+      }
+    }
+
+    /* Enhanced cards */
+    .card{
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:16px;
+      box-shadow: var(--shadow-md);
+      padding:24px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--mag), var(--navy));
+      border-radius: 16px 16px 0 0;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .title{
+      font-size:18px;
+      color:var(--navy);
+      margin:0 0 20px 0;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Enhanced form elements */
+    label{
+      display:block;
+      font-size:14px;
+      color:#374155;
+      margin:16px 0 8px;
+      font-weight: 600;
+    }
+
+    input,select,textarea{
+      width:100%;
+      padding:12px 16px;
+      border:1px solid var(--border);
+      border-radius:12px;
+      font-size:15px;
+      background:#fff;
+      transition: all 0.3s ease;
+      font-family: inherit;
+    }
+
+    input:focus,select:focus,textarea:focus{
+      outline: none;
+      border-color: var(--mag);
+      box-shadow: 0 0 0 3px rgba(255,43,122,0.1);
+    }
+
+    input::placeholder,textarea::placeholder {
+      color: var(--muted);
+    }
+
+    textarea{
+      min-height:100px;
+      resize: vertical;
+    }
+
+    .row{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:16px;
+    }
+
+    @media (max-width:640px){
+      .row{
+        grid-template-columns:1fr;
+      }
+    }
+
+    /* Enhanced tables */
+    .list{
+      margin-top:24px;
+    }
+
+    .list .title {
+      font-size: 16px;
+      margin-bottom: 16px;
+      color: var(--muted);
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+
+    th,td{
+      padding:12px 16px;
+      vertical-align:top;
+      border-bottom:1px solid var(--border);
+      text-align: left;
+    }
+
+    th{
+      font-size:12px;
+      color:var(--muted);
+      text-transform:uppercase;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      background: #f8fafc;
+    }
+
+    td {
+      font-size: 14px;
+    }
+
+    tr:hover {
+      background: #f8fafc;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    time{
+      display:inline-block;
+      background:#f1f5f9;
+      border:1px solid #cbd5e1;
+      border-radius:8px;
+      padding:4px 8px;
+      font-size:12px;
+      color:#475569;
+      font-weight: 500;
+    }
+
+    /* Enhanced notifications */
+    .note{
+      font-size:14px;
+      color:var(--muted);
+      margin-top:12px;
+      padding: 12px 16px;
+      border-radius: 12px;
+      border-left: 4px solid;
+      display: none;
+    }
+
+    .note.ok{
+      color:#065f46;
+      background: #f0fdf4;
+      border-color: var(--success);
+    }
+
+    .note.err{
+      color:#7f1d1d;
+      background: #fef2f2;
+      border-color: var(--error);
+    }
+
+    .note.info {
+      color:#0c4a6e;
+      background: #f0f9ff;
+      border-color: #0ea5e9;
+    }
+
+    /* Enhanced modal system */
+    .modal{
+      position:fixed;
+      inset:0;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+      z-index:100;
+      background:rgba(0,0,0,.6);
+      backdrop-filter: blur(4px);
+    }
+
+    .modal.open{
+      display:flex;
+    }
+
+    .modal-card{
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:20px;
+      box-shadow: var(--shadow-xl);
+      max-height:90vh;
+      overflow:auto;
+      animation: modalSlideIn 0.3s ease;
+    }
+
+    @keyframes modalSlideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .modal-card.sm{width:min(450px,95vw)}
+    .modal-card.md{width:min(750px,95vw)}
+    .modal-card.lg{width:min(1100px,95vw)}
+
+    @media (max-width:640px){ 
+      .modal-card{
+        border-radius:16px;
+        margin: 10px;
+      } 
+    }
+
+    .modal-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding:20px 24px;
+      border-bottom:1px solid var(--border);
+      background: linear-gradient(135deg, #f8fafc, #ffffff);
+    }
+
+    .modal-head h3{
+      margin:0;
+      font-size:20px;
+      color:var(--navy);
+      font-weight: 700;
+    }
+
+    .modal-close{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width:40px;
+      height:40px;
+      border:1px solid var(--border);
+      border-radius:50%;
+      background:#f8fafc;
+      cursor:pointer;
+      font-size:24px;
+      line-height:1;
+      transition: all 0.3s ease;
+    }
+
+    .modal-close:hover{
+      background:#eef2ff;
+      border-color: var(--mag);
+      color: var(--mag);
+      transform: scale(1.05);
+    }
+
+    .modal-body{
+      padding:24px;
+    }
+
+    .modal-actions{
+      display:flex;
+      justify-content:flex-end;
+      gap:12px;
+      padding:0 24px 24px;
+    }
+
+    .img-fluid{
+      max-width:100%;
+      height:auto;
+      border-radius:12px;
+      border:1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* Loading states */
+    .loading {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid rgba(255,255,255,.3);
+      border-radius: 50%;
+      border-top-color: #fff;
+      animation: spin 1s ease-in-out infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* File upload enhancements */
+    input[type="file"] {
+      padding: 12px;
+      background: #f8fafc;
+      border: 2px dashed var(--border);
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    input[type="file"]:hover {
+      border-color: var(--mag);
+      background: #fef7f7;
+    }
+
+    /* Preview enhancements */
+    #preview {
+      margin: 16px 0;
+      padding: 16px;
+      background: #f8fafc;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      text-align: center;
+    }
+
+    /* Form sections */
+    .form-section {
+      margin-bottom: 32px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .form-section:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+
+    .form-section h4 {
+      margin: 0 0 16px 0;
+      color: var(--navy);
+      font-size: 16px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Action buttons container */
+    .action-bar {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+
+    /* Status indicators */
+    .status-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 8px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .status-active {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .status-inactive {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    /* Responsive tables */
+    @media (max-width: 768px) {
+      .table-container {
+        overflow-x: auto;
+      }
+      
+      table {
+        min-width: 600px;
+      }
+    }
+
+    /* Enhanced accessibility */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    /* Focus styles */
+    *:focus {
+      outline: 2px solid var(--mag);
+      outline-offset: 2px;
+    }
+
+    button:focus, .btn:focus {
+      outline: 2px solid var(--mag);
+      outline-offset: 2px;
+    }
+
+    /* Print styles */
+    @media print {
+      .bar, .modal, .action-bar {
+        display: none;
+      }
+      
+      .card {
+        break-inside: avoid;
+        box-shadow: none;
+        border: 1px solid #ccc;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="bar">
+    <a href="/admin.html" class="brand">
+      <img src="/logo.jpeg" alt="Knowledge Garden Logo">
+      <span>Knowledge Garden</span>
+      <span style="color:var(--mag);font-weight:400;">Admin</span>
+    </a>
+    <div class="actions">
+      <a class="btn" href="/" title="View public website">
+        <span>🌐</span> Public Site
+      </a>
+      <button id="logoutBtn" class="btn" title="Logout from admin panel">
+        <span>🚪</span> Logout
+      </button>
+    </div>
+  </header>
+
+  <main class="grid">
+    <!-- Enhanced Tutorials Section -->
+    <section class="card">
+      <div class="title">
+        <span>📚</span> Tutorial Management
+      </div>
+
+      <div class="form-section">
+        <h4><span>📝</span> Basic Information</h4>
+        <div class="row">
+          <div>
+            <label for="tTitle">Tutorial Title *</label>
+            <input id="tTitle" placeholder="e.g., Getting Started with DHT11 Sensor" required>
+          </div>
+          <div>
+            <label for="tCategory">Category *</label>
+            <select id="tCategory" required>
+              <option value="">Select Category</option>
+              <option value="sensor">📊 Sensors</option>
+              <option value="communication">📡 Communication</option>
+              <option value="automation">🏠 Automation</option>
+              <option value="ai-ml">🤖 AI/ML</option>
+              <option value="robotics">🦾 Robotics</option>
+              <option value="energy">⚡ Energy</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div>
+            <label for="tDifficulty">Difficulty Level *</label>
+            <select id="tDifficulty" required>
+              <option value="">Select Difficulty</option>
+              <option value="beginner">🟢 Beginner</option>
+              <option value="intermediate">🟡 Intermediate</option>
+              <option value="advanced">🔴 Advanced</option>
+            </select>
+          </div>
+          <div>
+            <label for="tEstimatedTime">Estimated Time</label>
+            <input id="tEstimatedTime" placeholder="e.g., 45 minutes">
+          </div>
+        </div>
+
+        <div class="row">
+          <div>
+            <label for="tAuthor">Author</label>
+            <input id="tAuthor" placeholder="e.g., Knowledge Garden Team">
+          </div>
+          <div>
+            <label for="tComponents">Required Components</label>
+            <input id="tComponents" placeholder="e.g., DHT11, Arduino UNO, Jumper Wires (comma-separated)">
+          </div>
+        </div>
+
+        <label for="tTags">Tags</label>
+        <input id="tTags" placeholder="e.g., humidity, temperature, sensor (comma-separated)">
+      </div>
+
+      <div class="form-section">
+        <h4><span>📄</span> Content</h4>
+        <label for="tDesc">Tutorial Description *</label>
+        <textarea id="tDesc" placeholder="Provide a comprehensive description of what students will learn and build in this tutorial..." required></textarea>
+
+        <label for="tCode">Complete Source Code *</label>
+        <textarea id="tCode" placeholder="Paste the complete Arduino/Python code here..." required style="min-height:150px;font-family:monospace;"></textarea>
+      </div>
+
+      <div class="form-section">
+        <h4><span>🏗️</span> Architecture Diagram</h4>
+        <label for="tArch">Circuit Diagram / Wiring Schematic (Optional)</label>
+        <input id="tArch" type="file" accept="image/svg+xml,image/png,image/jpeg,image/webp">
+        <small style="color:var(--muted);font-size:12px;margin-top:4px;display:block;">
+          Supported formats: SVG, PNG, JPG, WebP • Max file size: 5 MB
+        </small>
+      </div>
+
+      <div class="action-bar">
+        <button id="addTutorialBtn" class="btn primary">
+          <span>🚀</span> Publish Tutorial
+        </button>
+        <div id="tMsg" class="note" role="status" aria-live="polite"></div>
+      </div>
+
+      <div class="list">
+        <div class="title">📋 Existing Tutorials</div>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Category</th>
+                <th>Difficulty</th>
+                <th>Created</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="tutRows">
+              <tr>
+                <td colspan="6" class="note info" style="text-align:center;padding:20px;">
+                  🔄 Loading tutorials...
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Enhanced Notifications Section -->
+    <section class="card">
+      <div class="title">
+        <span>📢</span> Event & Notification Management
+      </div>
+
+      <div class="form-section">
+        <h4><span>📅</span> Event Details</h4>
+        <label for="nTitle">Event Title *</label>
+        <input id="nTitle" placeholder="e.g., IoT Hackathon 2025" required>
+
+        <div class="row">
+          <div>
+            <label for="nWhen">Date & Time *</label>
+            <input id="nWhen" type="datetime-local" required>
+          </div>
+          <div>
+            <label for="nCat">Event Type *</label>
+            <select id="nCat" required>
+              <option value="">Select Type</option>
+              <option value="event">🎉 General Event</option>
+              <option value="workshop">🛠️ Workshop</option>
+              <option value="competition">🏆 Competition</option>
+            </select>
+          </div>
+        </div>
+
+        <label for="nVenue">Venue</label>
+        <input id="nVenue" placeholder="e.g., Main Auditorium / Virtual Event">
+      </div>
+
+      <div class="action-bar">
+        <button id="publishBtn" class="btn primary">
+          <span>📡</span> Publish Event
+        </button>
+        <div id="nMsg" class="note" role="status" aria-live="polite"></div>
+      </div>
+
+      <div class="list">
+        <div class="title">📋 Existing Events</div>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Date & Time</th>
+                <th>Type</th>
+                <th>Venue</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="noticeRows">
+              <tr>
+                <td colspan="5" class="note info" style="text-align:center;padding:20px;">
+                  🔄 Loading events...
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Enhanced Projects Section -->
+    <section class="card">
+      <div class="title">
+        <span>🎨</span> Project Gallery Management
+      </div>
+
+      <div class="form-section">
+        <h4><span>📝</span> Project Information</h4>
+        <div class="row">
+          <div>
+            <label for="pTitle">Project Title *</label>
+            <input id="pTitle" placeholder="e.g., Smart Environmental Monitoring System" required>
+          </div>
+          <div>
+            <label for="pTrack">Technology Track *</label>
+            <select id="pTrack" required>
+              <option value="">Select Track</option>
+              <option value="IoT">🌐 Internet of Things</option>
+              <option value="AI">🤖 Artificial Intelligence</option>
+              <option value="Robotics">🦾 Robotics</option>
+              <option value="Web">💻 Web Development</option>
+              <option value="Mobile">📱 Mobile Apps</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div>
+            <label for="pAuthors">Project Authors</label>
+            <input id="pAuthors" placeholder="e.g., Ramanan, Priya, Arjun">
+          </div>
+          <div>
+            <label for="pDesc">Short Description</label>
+            <input id="pDesc" placeholder="Brief project summary (1-2 lines)">
+          </div>
+        </div>
+        
+        <label for="pUrl">Reference URL (Optional)</label>
+        <input id="pUrl" type="url" placeholder="e.g., https://youtube.com/watch?v=xyz or https://github.com/project-repo">
+        <small style="color:var(--muted);font-size:12px;margin-top:4px;display:block;">
+          Add YouTube video, GitHub repository, documentation, or any reference link related to this project
+        </small>
+
+      <div class="form-section">
+        <h4><span>🖼️</span> Project Image</h4>
+        <label for="pImg">Cover Photo</label>
+        <input id="pImg" type="file" accept="image/png,image/jpeg,image/webp">
+        <small style="color:var(--muted);font-size:12px;margin-top:4px;display:block;">
+          Supported formats: PNG, JPG, WebP • Max file size: 5 MB • Recommended size: 800x600px
+        </small>
+
+        <div id="preview" style="display:none;">
+          <h4 style="margin-top:16px;margin-bottom:8px;font-size:14px;color:var(--muted);">Preview:</h4>
+          <img id="previewImg" alt="Project preview" class="img-fluid" style="max-height:200px;">
+        </div>
+      </div>
+
+      <div class="action-bar">
+        <button id="addProjectBtn" class="btn primary">
+          <span>🎨</span> Add to Gallery
+        </button>
+        <div id="pMsg" class="note" role="status" aria-live="polite"></div>
+      </div>
+
+      <div class="list">
+        <div class="title">📋 Existing Projects</div>
+                <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Track</th>
+                <th>Authors</th>
+                <th>Reference URL</th>
+                <th>Image</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="projRows">
+              <tr>
+                <td colspan="6" class="note info" style="text-align:center;padding:20px;">
+                  🔄 Loading projects...
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Enhanced Modal -->
+  <div class="modal" id="modalRoot" aria-modal="true" role="dialog" aria-labelledby="modalTitle" hidden>
+    <div class="modal-card md" id="modalCard">
+      <div class="modal-head">
+        <h3 id="modalTitle">Confirmation</h3>
+        <button class="modal-close" id="modalClose" aria-label="Close dialog">&times;</button>
+      </div>
+      <div class="modal-body" id="modalBody">
+        <p>Loading...</p>
+      </div>
+      <div class="modal-actions" id="modalActions" style="display:none"></div>
+    </div>
+  </div>
+
+  <script>
+    // Enhanced API helpers
+    const API = (path) => (window.API_BASE || '') + path;
+    const token = localStorage.getItem('kg_token') || '';
+    
+    function authHeaders() { 
+      return token ? { 'Authorization': 'Bearer ' + token } : {}; 
+    }
+    
+    function fmtDate(dateString) { 
+      if (!dateString) return '-'; 
+      const date = new Date(dateString); 
+      if (isNaN(date)) return '-'; 
+      return date.toLocaleString(undefined, {
+        year: 'numeric',
+        month: 'short',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit'
+      }); 
+    }
+
+    // Enhanced notification system
+    function showMessage(elementId, message, type = 'info') {
+      const element = document.getElementById(elementId);
+      if (!element) return;
+      
+      element.textContent = message;
+      element.className = `note ${type}`;
+      element.style.display = 'block';
+      
+      if (type === 'ok') {
+        setTimeout(() => {
+          element.style.display = 'none';
+        }, 3000);
+      }
+    }
+
+    function hideMessage(elementId) {
+      const element = document.getElementById(elementId);
+      if (element) {
+        element.style.display = 'none';
+      }
+    }
+
+    // Enhanced modal controller
+    const modal = (() => {
+      const root = document.getElementById('modalRoot');
+      const card = document.getElementById('modalCard');
+      const title = document.getElementById('modalTitle');
+      const body = document.getElementById('modalBody');
+      const actions = document.getElementById('modalActions');
+      const closeBtn = document.getElementById('modalClose');
+
+      function open({ titleText = 'Confirmation', html = '', size = 'md', buttons = [] } = {}) {
+        title.textContent = titleText;
+        body.innerHTML = html;
+        
+                // Set modal size
+        card.classList.remove('sm', 'md', 'lg');
+        card.classList.add(size);
+        
+        // Setup action buttons
+        actions.innerHTML = '';
+        if (buttons.length) {
+          actions.style.display = 'flex';
+          buttons.forEach(button => {
+            const element = document.createElement('button');
+            element.className = 'btn ' + (button.variant || '');
+            element.textContent = button.text;
+            element.addEventListener('click', () => button.onClick?.(close));
+            actions.appendChild(element);
+          });
+        } else {
+          actions.style.display = 'none';
+        }
+        
+        root.hidden = false;
+        root.classList.add('open');
+        closeBtn.focus();
+      }
+
+      function close() {
+        root.classList.remove('open');
+        root.hidden = true;
+        body.innerHTML = '';
+        actions.innerHTML = '';
+      }
+
+      // Enhanced event listeners
+      root.addEventListener('click', (e) => {
+        if (e.target === root) close();
+      });
+      
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !root.hidden) close();
+      });
+      
+      closeBtn.addEventListener('click', close);
+      
+      return { open, close };
+    })();
+
+    // Enhanced file preview functionality
+    (() => {
+      const fileInput = document.getElementById('pImg');
+      const previewBox = document.getElementById('preview');
+      const previewImg = document.getElementById('previewImg');
+      
+      if (!fileInput || !previewBox || !previewImg) return;
+      
+      fileInput.addEventListener('change', () => {
+        if (!fileInput.files || !fileInput.files[0]) {
+          previewBox.style.display = 'none';
+          return;
+        }
+        
+        const file = fileInput.files[0];
+        const validTypes = ['image/png', 'image/jpeg', 'image/webp'];
+        
+        if (!validTypes.includes(file.type)) {
+          modal.open({
+            titleText: '❌ Invalid File Type',
+            html: '<p>Please select a valid image file (PNG, JPG, or WebP).</p>',
+            size: 'sm'
+          });
+          fileInput.value = '';
+          previewBox.style.display = 'none';
+          return;
+        }
+        
+        if (file.size > 5 * 1024 * 1024) {
+          modal.open({
+            titleText: '❌ File Too Large',
+            html: '<p>Image file is too large. Please select a file smaller than 5 MB.</p>',
+            size: 'sm'
+          });
+          fileInput.value = '';
+          previewBox.style.display = 'none';
+          return;
+        }
+        
+        const url = URL.createObjectURL(file);
+        previewImg.src = url;
+        previewBox.style.display = 'block';
+      });
+    })();
+
+    // Enhanced notifications management
+   
+    async function loadNotices(){
+      const rows = document.getElementById('noticeRows');
+      rows.innerHTML = '<tr><td colspan="5" class="note">Loading…</td></tr>';
+      try{
+        const r = await fetch(API('/api/notifications?limit=100'));
+        const data = await r.json();
+        if(!Array.isArray(data)) throw new Error('Bad response');
+        if(!data.length){ rows.innerHTML = '<tr><td colspan="5" class="note">No data.</td></tr>'; return; }
+        rows.innerHTML = data.map(n=>`
+          <tr>
+            <td>${n.title}</td>
+            <td><time>${fmtDate(n.when)}</time></td>
+            <td>${(n.cat||'event')}</td>
+            <td>${n.venue||''}</td>
+            <td><button class="btn danger" data-del="${n._id}">Delete</button></td>
+          </tr>
+        `).join('');
+      }catch(e){
+        rows.innerHTML = '<tr><td colspan="5" class="note err">Failed to load notices.</td></tr>';
+      }
+    }
+
+    async function publishNotice(){
+      const title = document.getElementById('nTitle').value.trim();
+      const when  = document.getElementById('nWhen').value;
+      const cat   = document.getElementById('nCat').value;
+      const venue = document.getElementById('nVenue').value.trim();
+      
+      // Enhanced validation
+      if (!title) {
+        showMessage('nMsg', 'Event title is required', 'err');
+        document.getElementById('nTitle').focus();
+        return;
+      }
+      
+      if (!when) {
+        showMessage('nMsg', 'Event date and time is required', 'err');
+        document.getElementById('nWhen').focus();
+        return;
+      }
+      
+      if (!cat) {
+        showMessage('nMsg', 'Event type is required', 'err');
+        document.getElementById('nCat').focus();
+        return;
+      }
+
+      try {
+        showMessage('nMsg', '📡 Publishing event...', 'info');
+        
+        const response = await fetch(API('/api/notifications'), {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', ...authHeaders() },
+          body: JSON.stringify({ 
+            title, 
+            when: when ? new Date(when).toISOString() : '', 
+            cat, 
+            venue 
+          })
+        });
+        
+        const data = await response.json().catch(() => ({}));
+        
+        if (!response.ok) {
+          throw new Error(data?.error || `HTTP ${response.status}`);
+        }
+        
+        showMessage('nMsg', '✅ Event published successfully!', 'ok');
+        
+        // Clear form
+        document.getElementById('nTitle').value = '';
+        document.getElementById('nWhen').value = '';
+        document.getElementById('nVenue').value = '';
+        document.getElementById('nCat').value = '';
+        
+        loadNotices();
+      } catch (error) {
+        console.error('Failed to publish notice:', error);
+        showMessage('nMsg', `❌ Failed to publish: ${error.message}`, 'err');
+      }
+    }
+
+    // Enhanced tutorials management
+    async function loadTutorials() {
+      const rows = document.getElementById('tutRows');
+      if (!rows) return;
+      
+      rows.innerHTML = '<tr><td colspan="6" class="note info" style="text-align:center;padding:20px;">🔄 Loading tutorials...</td></tr>';
+      
+      try {
+        const response = await fetch(API('/api/tutorials?limit=100'), { 
+          headers: { ...authHeaders() } 
+        });
+        const data = await response.json();
+        
+        if (!Array.isArray(data)) throw new Error('Invalid response format');
+        
+        if (!data.length) {
+          rows.innerHTML = '<tr><td colspan="6" class="note info" style="text-align:center;padding:20px;">📚 No tutorials found. Create your first tutorial above!</td></tr>';
+          return;
+        }
+        
+        rows.innerHTML = data.map(tutorial => `
+          <tr>
+            <td style="font-weight:600;">${tutorial.title}</td>
+            <td>
+              <span class="status-indicator status-active">
+                ${tutorial.category === 'sensor' ? '📊' : 
+                  tutorial.category === 'communication' ? '📡' : 
+                  tutorial.category === 'automation' ? '🏠' : 
+                  tutorial.category === 'ai-ml' ? '🤖' : 
+                  tutorial.category === 'robotics' ? '🦾' : 
+                  tutorial.category === 'energy' ? '⚡' : '🔧'} 
+                ${(tutorial.category || 'general').toUpperCase()}
+              </span>
+            </td>
+            <td>
+              <span class="status-indicator ${
+                tutorial.difficulty === 'beginner' ? 'status-active' : 
+                tutorial.difficulty === 'intermediate' ? 'status-warning' : 'status-inactive'
+              }">
+                ${tutorial.difficulty === 'beginner' ? '🟢' : 
+                  tutorial.difficulty === 'intermediate' ? '🟡' : '🔴'} 
+                ${(tutorial.difficulty || 'beginner').toUpperCase()}
+              </span>
+            </td>
+            <td><time datetime="${tutorial.createdAt}">${fmtDate(tutorial.createdAt)}</time></td>
+            <td><span class="status-indicator status-active">🟢 ACTIVE</span></td>
+            <td>
+              <button class="btn danger" data-delt="${tutorial._id}" title="Delete this tutorial">
+                <span>🗑️</span> Delete
+              </button>
+            </td>
+          </tr>
+        `).join('');
+      } catch (error) {
+        console.error('Failed to load tutorials:', error);
+        rows.innerHTML = '<tr><td colspan="6" class="note err" style="text-align:center;padding:20px;">❌ Failed to load tutorials. Please try again.</td></tr>';
+      }
+    }
+
+    function readFileAsDataURL(file) {
+      return new Promise((resolve, reject) => {
+        const fileReader = new FileReader();
+        fileReader.onload = () => resolve(fileReader.result);
+        fileReader.onerror = (error) => reject(error);
+        fileReader.readAsDataURL(file);
+      });
+    }
+
+    async function addTutorial() {
+      const elements = {
+        title: document.getElementById('tTitle'),
+        description: document.getElementById('tDesc'),
+        category: document.getElementById('tCategory'),
+        difficulty: document.getElementById('tDifficulty'),
+        components: document.getElementById('tComponents'),
+        codeSnippet: document.getElementById('tCode'),
+        estimatedTime: document.getElementById('tEstimatedTime'),
+        author: document.getElementById('tAuthor'),
+        tags: document.getElementById('tTags'),
+        architecture: document.getElementById('tArch')
+      };
+      
+      // Enhanced validation
+      const requiredFields = [
+        { element: elements.title, name: 'title', message: 'Tutorial title is required' },
+        { element: elements.description, name: 'description', message: 'Tutorial description is required' },
+        { element: elements.category, name: 'category', message: 'Please select a category' },
+        { element: elements.difficulty, name: 'difficulty', message: 'Please select difficulty level' },
+        { element: elements.codeSnippet, name: 'code', message: 'Source code is required' }
+      ];
+      
+      for (const field of requiredFields) {
+        if (!field.element.value.trim()) {
+          showMessage('tMsg', field.message, 'err');
+          field.element.focus();
+          return;
+        }
+      }
+
+      const archFile = elements.architecture.files?.[0];
+      let architecture = '';
+      
+      if (archFile) {
+        const validTypes = ['image/svg+xml', 'image/png', 'image/jpeg', 'image/webp'];
+        if (!validTypes.includes(archFile.type)) {
+          modal.open({
+            titleText: '❌ Invalid File Type',
+            html: '<p>Architecture diagram must be SVG, PNG, JPG, or WebP format.</p>',
+            size: 'sm'
+          });
+          return;
+        }
+        
+        if (archFile.size > 5 * 1024 * 1024) {
+          modal.open({
+            titleText: '❌ File Too Large',
+            html: '<p>Architecture diagram file is too large (max 5 MB).</p>',
+            size: 'sm'
+          });
+          return;
+        }
+        
+        try {
+          architecture = await readFileAsDataURL(archFile);
+        } catch (error) {
+          showMessage('tMsg', `Failed to read architecture file: ${error.message}`, 'err');
+          return;
+        }
+      }
+
+      const components = elements.components.value.trim() ? 
+        elements.components.value.split(',').map(s => s.trim()).filter(Boolean) : [];
+      const tags = elements.tags.value.trim() ? 
+        elements.tags.value.split(',').map(s => s.trim()).filter(Boolean) : [];
+
+      try {
+        showMessage('tMsg', '🚀 Publishing tutorial...', 'info');
+        
+        const payload = {
+          title: elements.title.value.trim(),
+          description: elements.description.value.trim(),
+          category: elements.category.value,
+          difficulty: elements.difficulty.value,
+          components,
+          codeSnippet: elements.codeSnippet.value,
+          architecture,
+          estimatedTime: elements.estimatedTime.value.trim() || undefined,
+          author: elements.author.value.trim() || undefined,
+          tags
+        };
+        
+        const response = await fetch(API('/api/tutorials'), {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', ...authHeaders() },
+          body: JSON.stringify(payload)
+        });
+        
+        let data = null;
+        let text = '';
+        
+        try { 
+          data = await response.json(); 
+        } catch { 
+          try { 
+            text = await response.text(); 
+          } catch { } 
+        }
+        
+        if (!response.ok) {
+          throw new Error(data?.error || text || `HTTP ${response.status}`);
+        }
+        
+        showMessage('tMsg', '✅ Tutorial published successfully!', 'ok');
+        
+        // Clear form
+        Object.values(elements).forEach(element => {
+          if (element.type === 'file') {
+            element.value = '';
+          } else {
+            element.value = '';
+          }
+        });
+        
+        loadTutorials();
+      } catch (error) {
+        console.error('Failed to add tutorial:', error);
+        showMessage('tMsg', `❌ Failed to publish: ${error.message}`, 'err');
+      }
+    }
+
+        // Enhanced projects management
+    async function loadProjects() {
+      const rows = document.getElementById('projRows');
+      if (!rows) return;
+      
+      rows.innerHTML = '<tr><td colspan="5" class="note info" style="text-align:center;padding:20px;">🔄 Loading projects...</td></tr>';
+      
+      try {
+        const response = await fetch(API('/api/projects'));
+        const data = await response.json();
+        
+        console.log('Projects data received:', data);
+        
+        if (!Array.isArray(data)) throw new Error('Invalid response format');
+        
+        if (!data.length) {
+          rows.innerHTML = '<tr><td colspan="6" class="note info" style="text-align:center;padding:20px;">🎨 No projects found. Add your first project above!</td></tr>';
+          return;
+        }
+        
+        rows.innerHTML = data.map(project => {
+          return `
+            <tr>
+              <td style="font-weight:600;">${project.title}</td>
+              <td>
+                <span class="status-indicator status-active">
+                  ${project.track === 'IoT' ? '🌐' : 
+                    project.track === 'AI' ? '🤖' : 
+                    project.track === 'Robotics' ? '🦾' : 
+                    project.track === 'Web' ? '💻' : 
+                    project.track === 'Mobile' ? '📱' : '🔧'} 
+                  ${project.track || 'General'}
+                </span>
+              </td>
+              <td>${project.authors || '<em style="color:var(--muted);">No authors specified</em>'}</td>
+              <td style="max-width: 200px; word-wrap: break-word;">
+                ${project.url && project.url.trim() ? 
+                  `<a href="${project.url}" target="_blank" rel="noopener noreferrer" 
+                     style="color: var(--mag); text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 4px; max-width: 100%; overflow: hidden; text-overflow: ellipsis;"
+                     title="${project.url}">
+                    🔗 ${project.url.length > 30 ? project.url.substring(0, 30) + '...' : project.url}
+                  </a>` : 
+                  '<em style="color:var(--muted);">No URL</em>'
+                }
+              </td>
+              <td>
+                ${project.img ? 
+                  `<img src="${project.img}" 
+                       data-preview="${project.img}" 
+                       alt="${project.title}" 
+                       style="height:44px;width:60px;object-fit:cover;border-radius:8px;border:1px solid var(--border);cursor:pointer;" 
+                       title="Click to preview">` : 
+                  '<em style="color:var(--muted);">No image</em>'
+                }
+              </td>
+              <td>
+                <button class="btn danger" data-delp="${project._id}" title="Delete this project">
+                  <span>🗑️</span> Delete
+                </button>
+              </td>
+            </tr>
+          `;
+        }).join('');
+      } catch (error) {
+        console.error('Failed to load projects:', error);
+        rows.innerHTML = '<tr><td colspan="6" class="note err" style="text-align:center;padding:20px;">❌ Failed to load projects. Please try again.</td></tr>';
+      }
+    }
+
+    async function addProject() {
+      const elements = {
+        title: document.getElementById('pTitle'),
+        track: document.getElementById('pTrack'),
+        authors: document.getElementById('pAuthors'),
+        desc: document.getElementById('pDesc'),
+        url: document.getElementById('pUrl'),
+        image: document.getElementById('pImg')
+      };
+      
+      // Enhanced validation
+      if (!elements.title || !elements.title.value.trim()) {
+        showMessage('pMsg', 'Project title is required', 'err');
+        elements.title?.focus();
+        return;
+      }
+      
+      if (!elements.track || !elements.track.value) {
+        showMessage('pMsg', 'Please select a technology track', 'err');
+        elements.track?.focus();
+        return;
+      }
+
+      // Validate URL if provided
+      if (elements.url && elements.url.value.trim()) {
+        try {
+          new URL(elements.url.value.trim());
+          console.log('URL validation passed:', elements.url.value.trim());
+        } catch (error) {
+          console.error('URL validation failed:', error);
+          showMessage('pMsg', 'Please enter a valid URL (e.g., https://example.com)', 'err');
+          elements.url.focus();
+          return;
+        }
+      }
+
+      const formData = new FormData();
+      formData.append('title', elements.title.value.trim());
+      formData.append('track', elements.track.value);
+      formData.append('authors', elements.authors.value.trim());
+      formData.append('desc', elements.desc.value.trim());
+      
+      // Ensure URL is properly appended
+      const urlValue = elements.url.value.trim();
+      if (urlValue) {
+        formData.append('url', urlValue);
+      }
+
+      if (elements.image.files && elements.image.files[0]) {
+        const file = elements.image.files[0];
+        const validTypes = ['image/png', 'image/jpeg', 'image/webp'];
+        
+        if (!validTypes.includes(file.type)) {
+          modal.open({
+            titleText: '❌ Invalid File Type',
+            html: '<p>Project image must be PNG, JPG, or WebP format.</p>',
+            size: 'sm'
+          });
+          return;
+        }
+        
+        if (file.size > 5 * 1024 * 1024) {
+          modal.open({
+            titleText: '❌ File Too Large',
+            html: '<p>Project image file is too large (max 5 MB).</p>',
+            size: 'sm'
+          });
+          return;
+        }
+        
+        formData.append('image', file);
+      }
+
+      try {
+        showMessage('pMsg', '🎨 Adding to gallery...', 'info');
+        
+        const response = await fetch(API('/api/projects'), { 
+          method: 'POST', 
+          headers: { ...authHeaders() }, 
+          body: formData 
+        });
+
+        // Handle authentication errors
+        if (response.status === 401 || response.status === 403) {
+          localStorage.removeItem('kg_token');
+          localStorage.removeItem('kg_user');
+          
+          modal.open({
+            titleText: '🔐 Session Expired',
+            html: '<p>Your session has expired. Please login again to continue.</p>',
+            size: 'sm',
+            buttons: [
+              { 
+                text: 'Go to Login', 
+                variant: 'primary',
+                onClick: () => {
+                  location.href = '/login.html';
+                }
+              }
+            ]
+          });
+          throw new Error('Authentication required');
+        }
+        
+        let payload = null;
+        let text = '';
+        
+        try { 
+          payload = await response.json(); 
+          console.log('Server response:', payload);
+        } catch { 
+          try { 
+            text = await response.text(); 
+            console.log('Server response (text):', text);
+          } catch { } 
+        }
+        
+        if (!response.ok) {
+          throw new Error(payload?.error || text || `HTTP ${response.status}`);
+        }
+        
+        showMessage('pMsg', '✅ Project added to gallery successfully!', 'ok');
+        
+        // Clear form
+        Object.values(elements).forEach(element => {
+          if (element && element.value !== undefined) {
+            element.value = '';
+          }
+        });
+        document.getElementById('preview').style.display = 'none';
+        
+        // Reload projects to see the new entry
+        setTimeout(() => {
+          loadProjects();
+        }, 1000);
+        
+      } catch (error) {
+        console.error('Failed to add project:', error);
+        showMessage('pMsg', `❌ Failed to add project: ${error.message}`, 'err');
+      }
+    }
+
+    // ---- event delegation for delete operations ----
+    document.addEventListener('click', async (e)=>{
+      // Delete notification
+      const delBtn = e.target.closest('button[data-del]');
+      if(delBtn){
+        const id = delBtn.dataset.del;
+        modal.open({
+          titleText:'Delete notice?',
+          html:'This action cannot be undone.',
+          size:'sm',
+          buttons:[
+            { text:'Cancel', onClick:(close)=>close() },
+            { text:'Delete', variant:'danger', onClick: async (close)=>{
+                try{
+                  const r = await fetch(API('/api/notifications/'+id), { method:'DELETE', headers: authHeaders() });
+                  if(!r.ok) throw new Error('HTTP '+r.status);
+                  close(); loadNotices();
+                }catch(err){ close(); modal.open({titleText:'Delete failed', html:String(err.message), size:'sm'}); }
+              }
+            }
+          ]
+        });
+        return;
+      }
+
+      // Delete tutorial
+      const delTut = e.target.closest('button[data-delt]');
+      if(delTut){
+        const id = delTut.dataset.delt;
+        modal.open({
+          titleText:'Delete tutorial?',
+          html:'This will mark the tutorial inactive.',
+          size:'sm',
+          buttons:[
+            { text:'Cancel', onClick:(close)=>close() },
+            { text:'Delete', variant:'danger', onClick: async (close)=>{
+                try{
+                  const r = await fetch(API('/api/tutorials/'+id), { method:'DELETE', headers: authHeaders() });
+                  if(!r.ok) throw new Error('HTTP '+r.status);
+                  close(); loadTutorials();
+                }catch(err){ close(); modal.open({titleText:'Delete failed', html:String(err.message), size:'sm'}); }
+              }
+            }
+          ]
+        });
+        return;
+      }
+
+      // Delete project
+      const delProj = e.target.closest('button[data-delp]');
+      if(delProj){
+        const id = delProj.dataset.delp;
+        modal.open({
+          titleText:'Delete project?',
+          html:'This will remove the project permanently.',
+          size:'sm',
+          buttons:[
+            { text:'Cancel', onClick:(close)=>close() },
+            { text:'Delete', variant:'danger', onClick: async (close)=>{
+                try{
+                  const r = await fetch(API('/api/projects/'+id), { method:'DELETE', headers: authHeaders() });
+                  if(!r.ok) throw new Error('HTTP '+r.status);
+                  close(); loadProjects();
+                }catch(err){ close(); modal.open({titleText:'Delete failed', html:String(err.message), size:'sm'}); }
+              }
+            }
+          ]
+        });
+        return;
+      }
+
+      // Image preview modal (click thumbnail)
+      const img = e.target.closest('img[data-preview]');
+      if(img){
+        modal.open({
+          titleText: 'Image preview',
+          html: `<img src="${img.dataset.preview}" alt="" class="img-fluid">`,
+          size: 'lg'
+        });
+      }
+    });
+
+    // Setup event listeners (single instance only)
+    document.getElementById('publishBtn')?.addEventListener('click', publishNotice);
+    document.getElementById('addProjectBtn')?.addEventListener('click', addProject);
+    document.getElementById('addTutorialBtn')?.addEventListener('click', addTutorial);
+
+    document.getElementById('logoutBtn')?.addEventListener('click', () => {
+      modal.open({
+        titleText: '🚪 Logout Confirmation',
+        html: '<p>Are you sure you want to logout from the admin panel?</p>',
+        size: 'sm',
+        buttons: [
+          { text: 'Cancel', onClick: (close) => close() },
+          { 
+            text: 'Logout', 
+            variant: 'danger', 
+            onClick: () => {
+              localStorage.removeItem('kg_token');
+              localStorage.removeItem('kg_user');
+              location.href = '/login.html';
+            }
+          }
+        ]
+      });
+    });
+
+    // Token validation and initial load
+    if(!token){ location.href = '/login.html'; }
+    
+    // Load initial data
+    Promise.all([
+      loadNotices(),
+      loadProjects(), 
+      loadTutorials()
+    ]).then(() => {
+      console.log('✅ Admin dashboard loaded successfully');
+    }).catch(error => {
+      console.error('❌ Failed to load dashboard data:', error);
+    });
+
+    // Enhanced error handling
+    window.addEventListener('error', (e) => {
+      console.error('Global error:', e.error);
+      
+      modal.open({
+        titleText: '⚠️ Unexpected Error',
+        html: '<p>An unexpected error occurred. Please refresh the page if the problem persists.</p>',
+        size: 'sm'
+      });
+    });
+
+  </script>
+</body>
+</html>

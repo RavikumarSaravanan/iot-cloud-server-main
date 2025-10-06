@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Knowledge Garden — Admin Login</title>
+  <meta name="description" content="Admin login for Knowledge Garden." />
+  <style>
+    :root{ --navy:#0A2E6F; --mag:#FF2B7A; --border:#e5e7eb; --muted:#64748b; }
+    html,body{margin:0;height:100%;font-family:Inter,system-ui,Segoe UI,Arial,sans-serif;background:#f8fafc;color:#0f172a}
+    .wrap{min-height:100%;display:grid;place-items:center;padding:24px}
+    .card{width:min(440px,94vw);background:#fff;border:1px solid var(--border);border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,.08);overflow:hidden}
+    .head{display:flex;gap:12px;align-items:center;padding:16px;border-bottom:1px solid var(--border)}
+    .head img{width:36px;height:36px;border-radius:10px;object-fit:cover}
+    .head h1{font-size:18px;margin:0;color:var(--navy)}
+    .body{padding:18px}
+    label{display:block;margin:10px 0 6px;font-size:14px}
+    input{width:100%;padding:12px;border:1px solid var(--border);border-radius:12px;font:inherit}
+    .row{display:grid;grid-template-columns:1fr;gap:10px}
+    .btn{width:100%;padding:12px;border-radius:12px;border:none;cursor:pointer;font-weight:700}
+    .btn.primary{background:linear-gradient(90deg,var(--navy),var(--mag));color:#fff}
+    .muted{color:var(--muted);font-size:13px;margin-top:10px}
+    .err{color:#7f1d1d}
+    .ok{color:#166534}
+    .debug{background:#f0f9ff;border:1px solid #0ea5e9;border-radius:8px;padding:12px;margin:10px 0;font-size:12px;font-family:monospace;}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <form class="card" id="form">
+      <div class="head">
+        <img src="logo.jpeg" alt="KG" onerror="this.style.display='none'"/>
+        <h1>Admin Login</h1>
+      </div>
+      <div class="body">
+        <div class="debug" id="debug">
+          Loading... Please wait while we initialize the login system.
+        </div>
+        
+        <div class="row">
+          <div>
+            <label for="email">Email</label>
+            <input id="email" type="email" autocomplete="username" placeholder="kg_admin@egspec.org" required />
+          </div>
+          <div>
+            <label for="password">Password</label>
+            <input id="password" type="password" autocomplete="current-password" placeholder="kg@2025" required />
+          </div>
+        </div>
+        <button class="btn primary" id="loginBtn" type="submit">Sign in</button>
+        <div id="msg" class="muted" role="status" aria-live="polite"></div>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    // Debug information
+    const debug = document.getElementById('debug');
+    
+    function addDebug(message) {
+      console.log('[DEBUG]', message);
+      debug.innerHTML += '<br>' + new Date().toLocaleTimeString() + ': ' + message;
+    }
+    
+    addDebug('Login page loaded successfully');
+    addDebug('Current URL: ' + window.location.href);
+    
+    // Check if we can reach the server
+    fetch('/test')
+      .then(response => response.json())
+      .then(data => {
+        addDebug('✅ Server connection: ' + data.message);
+      })
+      .catch(error => {
+        addDebug('❌ Server connection failed: ' + error.message);
+      });
+
+    // Enhanced config
+    const API_BASE = window.location.origin;
+    addDebug('API Base URL: ' + API_BASE);
+
+    // If already logged in, try to verify and redirect to admin
+    (async function guardIfLoggedIn(){
+      const token = localStorage.getItem('kg_token');
+      if(!token) {
+        addDebug('No existing token found');
+        return;
+      }
+      
+      addDebug('Found existing token, validating...');
+      
+      try{
+        const response = await fetch(API_BASE + '/api/auth/me', { 
+          headers: { 'Authorization': 'Bearer ' + token } 
+        });
+        
+        if(response.ok){
+          addDebug('✅ Valid token found, redirecting to admin...');
+          window.location.href = '/admin.html';
+        } else {
+          addDebug('❌ Invalid token, clearing storage');
+          localStorage.removeItem('kg_token');
+          localStorage.removeItem('kg_user');
+        }
+      } catch(error) { 
+        addDebug('❌ Token validation error: ' + error.message);
+        localStorage.removeItem('kg_token');
+        localStorage.removeItem('kg_user');
+      }
+    })();
+
+    const form = document.getElementById('form');
+    const msg = document.getElementById('msg');
+    
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+      
+      if (!email || !password) {
+        msg.innerHTML = '<span class="err">Please enter both email and password</span>';
+        return;
+      }
+      
+      addDebug('🔄 Attempting login for: ' + email);
+      msg.textContent = 'Signing in...';
+      msg.className = 'muted';
+      
+      try {
+        const loginUrl = API_BASE + '/api/auth/login';
+        addDebug('Login URL: ' + loginUrl);
+        
+        const response = await fetch(loginUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        });
+        
+        addDebug('Login response status: ' + response.status);
+        
+        if (!response.ok) {
+          let errorMessage = 'Login failed';
+          try {
+            const errorData = await response.json();
+            errorMessage = errorData.error || errorMessage;
+            addDebug('Login error details: ' + JSON.stringify(errorData));
+          } catch {
+            const text = await response.text().catch(() => '');
+            errorMessage = text || `HTTP ${response.status}`;
+            addDebug('Login error text: ' + text);
+          }
+          throw new Error(errorMessage);
+        }
+        
+        const data = await response.json();
+        addDebug('✅ Login successful: ' + JSON.stringify({...data, token: '[HIDDEN]'}));
+        
+        if (!data?.token) {
+          throw new Error('Invalid response from server - no token received');
+        }
+        
+        // Store token
+        localStorage.setItem('kg_token', data.token);
+        addDebug('Token stored in localStorage');
+        
+        // Store user info if available
+        if (data.user) {
+          localStorage.setItem('kg_user', JSON.stringify(data.user));
+          addDebug('User info stored: ' + JSON.stringify(data.user));
+        }
+        
+        // Admin role check
+        if (data.user && data.user.role && data.user.role !== 'admin') {
+          localStorage.removeItem('kg_token');
+          localStorage.removeItem('kg_user');
+          throw new Error('Access denied - admin privileges required');
+        }
+        
+        msg.innerHTML = '<span class="ok">Login successful! Redirecting...</span>';
+        addDebug('🚀 Redirecting to admin dashboard...');
+        
+        // Redirect to admin dashboard
+        setTimeout(() => {
+          window.location.href = '/admin.html';
+        }, 1500);
+        
+      } catch(err) {
+        addDebug('❌ Login failed: ' + err.message);
+        console.error('Login error:', err);
+        msg.innerHTML = `<span class="err">${err.message}</span>`;
+      }
+    });
+    
+    addDebug('Login form initialized successfully');
+  </script>
+</body>
+</html>
