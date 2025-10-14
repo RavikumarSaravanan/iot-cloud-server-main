@@ -41,8 +41,10 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads'), { maxAge: '7
 
 // --- CORS ---
 const corsOrigin = process.env.CORS_ORIGIN || '*';
-app.use(cors({ origin: corsOrigin, credentials: false }));
-// --- API routes with rate limit ---
+app.use(cors({
+  origin: process.env.CORS_ORIGIN,
+  credentials: true
+}));// --- API routes with rate limit ---
 app.use('/api', apiLimiter);
 app.use('/api/auth', authRoutes);
 app.use('/api/notifications', notifRoutes);
