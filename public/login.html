@@ -69,17 +69,10 @@
     fetch('/test')
       .then(response => response.json())
       .then(data => {
-<<<<<<< HEAD
-        addDebug('✅ Server connection: ' + data.message);
-      })
-      .catch(error => {
-        addDebug('❌ Server connection failed: ' + error.message);
-=======
         addDebug(' Server connection: ' + data.message);
       })
       .catch(error => {
         addDebug(' Server connection failed: ' + error.message);
->>>>>>> ffe8e6a (Initial commit)
       });
 
     // Enhanced config
@@ -102,26 +95,15 @@
         });
         
         if(response.ok){
-<<<<<<< HEAD
-          addDebug('✅ Valid token found, redirecting to admin...');
-          window.location.href = '/admin.html';
-        } else {
-          addDebug('❌ Invalid token, clearing storage');
-=======
           addDebug(' Valid token found, redirecting to admin...');
           window.location.href = '/admin.html';
         } else {
           addDebug(' Invalid token, clearing storage');
->>>>>>> ffe8e6a (Initial commit)
           localStorage.removeItem('kg_token');
           localStorage.removeItem('kg_user');
         }
       } catch(error) { 
-<<<<<<< HEAD
-        addDebug('❌ Token validation error: ' + error.message);
-=======
         addDebug(' Token validation error: ' + error.message);
->>>>>>> ffe8e6a (Initial commit)
         localStorage.removeItem('kg_token');
         localStorage.removeItem('kg_user');
       }
@@ -172,11 +154,7 @@
         }
         
         const data = await response.json();
-<<<<<<< HEAD
-        addDebug('✅ Login successful: ' + JSON.stringify({...data, token: '[HIDDEN]'}));
-=======
         addDebug(' Login successful: ' + JSON.stringify({...data, token: '[HIDDEN]'}));
->>>>>>> ffe8e6a (Initial commit)
         
         if (!data?.token) {
           throw new Error('Invalid response from server - no token received');
@@ -200,11 +178,7 @@
         }
         
         msg.innerHTML = '<span class="ok">Login successful! Redirecting...</span>';
-<<<<<<< HEAD
-        addDebug('🚀 Redirecting to admin dashboard...');
-=======
         addDebug(' Redirecting to admin dashboard...');
->>>>>>> ffe8e6a (Initial commit)
         
         // Redirect to admin dashboard
         setTimeout(() => {
@@ -212,11 +186,7 @@
         }, 1500);
         
       } catch(err) {
-<<<<<<< HEAD
-        addDebug('❌ Login failed: ' + err.message);
-=======
         addDebug(' Login failed: ' + err.message);
->>>>>>> ffe8e6a (Initial commit)
         console.error('Login error:', err);
         msg.innerHTML = `<span class="err">${err.message}</span>`;
       }

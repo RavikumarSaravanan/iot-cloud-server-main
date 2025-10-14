@@ -598,7 +598,7 @@
 
     /* Print styles */
     @media print {
-      .bar, .modal, .action-bar {
+            .bar, .modal, .action-bar {
         display: none;
       }
       
@@ -619,17 +619,10 @@
     </a>
     <div class="actions">
       <a class="btn" href="/" title="View public website">
-<<<<<<< HEAD
-        <span>🌐</span> Public Site
-      </a>
-      <button id="logoutBtn" class="btn" title="Logout from admin panel">
-        <span>🚪</span> Logout
-=======
         <span></span> Public Site
       </a>
       <button id="logoutBtn" class="btn" title="Logout from admin panel">
         <span></span> Logout
->>>>>>> ffe8e6a (Initial commit)
       </button>
     </div>
   </header>
@@ -638,19 +631,11 @@
     <!-- Enhanced Tutorials Section -->
     <section class="card">
       <div class="title">
-<<<<<<< HEAD
-        <span>📚</span> Tutorial Management
-      </div>
-
-      <div class="form-section">
-        <h4><span>📝</span> Basic Information</h4>
-=======
         <span></span> Tutorial Management
       </div>
 
       <div class="form-section">
         <h4><span></span> Basic Information</h4>
->>>>>>> ffe8e6a (Initial commit)
         <div class="row">
           <div>
             <label for="tTitle">Tutorial Title *</label>
@@ -660,20 +645,12 @@
             <label for="tCategory">Category *</label>
             <select id="tCategory" required>
               <option value="">Select Category</option>
-<<<<<<< HEAD
-              <option value="sensor">📊 Sensors</option>
-              <option value="communication">📡 Communication</option>
-              <option value="automation">🏠 Automation</option>
-              <option value="ai-ml">🤖 AI/ML</option>
-              <option value="robotics">🦾 Robotics</option>
-              <option value="energy">⚡ Energy</option>
-=======
               <option value="sensor"> Sensors</option>
-            
+              <option value="communication"> Communication</option>
               <option value="automation"> Automation</option>
               <option value="ai-ml"> AI/ML</option>
-              <option value="robotics">Robotics</option>
->>>>>>> ffe8e6a (Initial commit)
+              <option value="robotics"> Robotics</option>
+              <option value="energy"> Energy</option>
             </select>
           </div>
         </div>
@@ -683,15 +660,9 @@
             <label for="tDifficulty">Difficulty Level *</label>
             <select id="tDifficulty" required>
               <option value="">Select Difficulty</option>
-<<<<<<< HEAD
-              <option value="beginner">🟢 Beginner</option>
-              <option value="intermediate">🟡 Intermediate</option>
-              <option value="advanced">🔴 Advanced</option>
-=======
               <option value="beginner"> Beginner</option>
-              <option value="intermediate">Intermediate</option>
+              <option value="intermediate"> Intermediate</option>
               <option value="advanced"> Advanced</option>
->>>>>>> ffe8e6a (Initial commit)
             </select>
           </div>
           <div>
@@ -716,11 +687,7 @@
       </div>
 
       <div class="form-section">
-<<<<<<< HEAD
-        <h4><span>📄</span> Content</h4>
-=======
         <h4><span></span> Content</h4>
->>>>>>> ffe8e6a (Initial commit)
         <label for="tDesc">Tutorial Description *</label>
         <textarea id="tDesc" placeholder="Provide a comprehensive description of what students will learn and build in this tutorial..." required></textarea>
 
@@ -729,11 +696,7 @@
       </div>
 
       <div class="form-section">
-<<<<<<< HEAD
-        <h4><span>🏗️</span> Architecture Diagram</h4>
-=======
         <h4><span></span> Architecture Diagram</h4>
->>>>>>> ffe8e6a (Initial commit)
         <label for="tArch">Circuit Diagram / Wiring Schematic (Optional)</label>
         <input id="tArch" type="file" accept="image/svg+xml,image/png,image/jpeg,image/webp">
         <small style="color:var(--muted);font-size:12px;margin-top:4px;display:block;">
@@ -743,21 +706,13 @@
 
       <div class="action-bar">
         <button id="addTutorialBtn" class="btn primary">
-<<<<<<< HEAD
-          <span>🚀</span> Publish Tutorial
-=======
           <span></span> Publish Tutorial
->>>>>>> ffe8e6a (Initial commit)
         </button>
         <div id="tMsg" class="note" role="status" aria-live="polite"></div>
       </div>
 
       <div class="list">
-<<<<<<< HEAD
-        <div class="title">📋 Existing Tutorials</div>
-=======
         <div class="title"> Existing Tutorials</div>
->>>>>>> ffe8e6a (Initial commit)
         <div class="table-container">
           <table>
             <thead>
@@ -773,11 +728,7 @@
             <tbody id="tutRows">
               <tr>
                 <td colspan="6" class="note info" style="text-align:center;padding:20px;">
-<<<<<<< HEAD
-                  🔄 Loading tutorials...
-=======
                    Loading tutorials...
->>>>>>> ffe8e6a (Initial commit)
                 </td>
               </tr>
             </tbody>
@@ -789,20 +740,15 @@
     <!-- Enhanced Notifications Section -->
     <section class="card">
       <div class="title">
-<<<<<<< HEAD
-        <span>📢</span> Event & Notification Management
-      </div>
-
-      <div class="form-section">
-        <h4><span>📅</span> Event Details</h4>
-=======
         <span></span> Event & Notification Management
       </div>
+
+      
 
       <div class="form-section">
         <h4><span>
         </span> Event Details</h4>
->>>>>>> ffe8e6a (Initial commit)
+
         <label for="nTitle">Event Title *</label>
         <input id="nTitle" placeholder="e.g., IoT Hackathon 2025" required>
 
@@ -815,15 +761,9 @@
             <label for="nCat">Event Type *</label>
             <select id="nCat" required>
               <option value="">Select Type</option>
-<<<<<<< HEAD
-              <option value="event">🎉 General Event</option>
-              <option value="workshop">🛠️ Workshop</option>
-              <option value="competition">🏆 Competition</option>
-=======
               <option value="event"> General Event</option>
               <option value="workshop"> Workshop</option>
               <option value="competition"> Competition</option>
->>>>>>> ffe8e6a (Initial commit)
             </select>
           </div>
         </div>
@@ -834,21 +774,14 @@
 
       <div class="action-bar">
         <button id="publishBtn" class="btn primary">
-<<<<<<< HEAD
-          <span>📡</span> Publish Event
-=======
           <span></span> Publish Event
->>>>>>> ffe8e6a (Initial commit)
         </button>
         <div id="nMsg" class="note" role="status" aria-live="polite"></div>
       </div>
 
       <div class="list">
-<<<<<<< HEAD
-        <div class="title">📋 Existing Events</div>
-=======
         <div class="title"> Existing Events</div>
->>>>>>> ffe8e6a (Initial commit)
+
         <div class="table-container">
           <table>
             <thead>
@@ -863,11 +796,9 @@
             <tbody id="noticeRows">
               <tr>
                 <td colspan="5" class="note info" style="text-align:center;padding:20px;">
-<<<<<<< HEAD
-                  🔄 Loading events...
-=======
+
                    Loading events...
->>>>>>> ffe8e6a (Initial commit)
+
                 </td>
               </tr>
             </tbody>
@@ -879,19 +810,12 @@
     <!-- Enhanced Projects Section -->
     <section class="card">
       <div class="title">
-<<<<<<< HEAD
-        <span>🎨</span> Project Gallery Management
-      </div>
-
-      <div class="form-section">
-        <h4><span>📝</span> Project Information</h4>
-=======
          Project Gallery Management
       </div>
 
       <div class="form-section">
         <h4> Project Information</h4>
->>>>>>> ffe8e6a (Initial commit)
+
         <div class="row">
           <div>
             <label for="pTitle">Project Title *</label>
@@ -901,19 +825,12 @@
             <label for="pTrack">Technology Track *</label>
             <select id="pTrack" required>
               <option value="">Select Track</option>
-<<<<<<< HEAD
-              <option value="IoT">🌐 Internet of Things</option>
-              <option value="AI">🤖 Artificial Intelligence</option>
-              <option value="Robotics">🦾 Robotics</option>
-              <option value="Web">💻 Web Development</option>
-              <option value="Mobile">📱 Mobile Apps</option>
-=======
+
               <option value="IoT"> Internet of Things</option>
               <option value="AI"> Artificial Intelligence</option>
               <option value="Robotics"> Robotics</option>
               <option value="Web"> Web Development</option>
               <option value="Mobile"> Mobile Apps</option>
->>>>>>> ffe8e6a (Initial commit)
             </select>
           </div>
         </div>
@@ -936,11 +853,9 @@
         </small>
 
       <div class="form-section">
-<<<<<<< HEAD
-        <h4><span>🖼️</span> Project Image</h4>
-=======
+
         <h4> Project Image</h4>
->>>>>>> ffe8e6a (Initial commit)
+
         <label for="pImg">Cover Photo</label>
         <input id="pImg" type="file" accept="image/png,image/jpeg,image/webp">
         <small style="color:var(--muted);font-size:12px;margin-top:4px;display:block;">
@@ -955,21 +870,15 @@
 
       <div class="action-bar">
         <button id="addProjectBtn" class="btn primary">
-<<<<<<< HEAD
-          <span>🎨</span> Add to Gallery
-=======
           Add to Gallery
->>>>>>> ffe8e6a (Initial commit)
+
         </button>
         <div id="pMsg" class="note" role="status" aria-live="polite"></div>
       </div>
 
       <div class="list">
-<<<<<<< HEAD
-        <div class="title">📋 Existing Projects</div>
-=======
+
         <div class="title"> Existing Projects</div>
->>>>>>> ffe8e6a (Initial commit)
                 <div class="table-container">
           <table>
             <thead>
@@ -985,11 +894,8 @@
             <tbody id="projRows">
               <tr>
                 <td colspan="6" class="note info" style="text-align:center;padding:20px;">
-<<<<<<< HEAD
-                  🔄 Loading projects...
-=======
                    Loading projects...
->>>>>>> ffe8e6a (Initial commit)
+
                 </td>
               </tr>
             </tbody>
@@ -1135,11 +1041,7 @@
         
         if (!validTypes.includes(file.type)) {
           modal.open({
-<<<<<<< HEAD
-            titleText: '❌ Invalid File Type',
-=======
-            titleText: ' Invalid File Type',
->>>>>>> ffe8e6a (Initial commit)
+            titleText: 'Invalid File Type',
             html: '<p>Please select a valid image file (PNG, JPG, or WebP).</p>',
             size: 'sm'
           });
@@ -1150,11 +1052,7 @@
         
         if (file.size > 5 * 1024 * 1024) {
           modal.open({
-<<<<<<< HEAD
-            titleText: '❌ File Too Large',
-=======
-            titleText: ' File Too Large',
->>>>>>> ffe8e6a (Initial commit)
+            titleText: 'File Too Large',
             html: '<p>Image file is too large. Please select a file smaller than 5 MB.</p>',
             size: 'sm'
           });
@@ -1219,11 +1117,7 @@
       }
 
       try {
-<<<<<<< HEAD
-        showMessage('nMsg', '📡 Publishing event...', 'info');
-=======
-        showMessage('nMsg', ' Publishing event...', 'info');
->>>>>>> ffe8e6a (Initial commit)
+        showMessage('nMsg', 'Publishing event...', 'info');
         
         const response = await fetch(API('/api/notifications'), {
           method: 'POST',
@@ -1242,11 +1136,7 @@
           throw new Error(data?.error || `HTTP ${response.status}`);
         }
         
-<<<<<<< HEAD
-        showMessage('nMsg', '✅ Event published successfully!', 'ok');
-=======
-        showMessage('nMsg', ' Event published successfully!', 'ok');
->>>>>>> ffe8e6a (Initial commit)
+        showMessage('nMsg', 'Event published successfully!', 'ok');
         
         // Clear form
         document.getElementById('nTitle').value = '';
@@ -1257,11 +1147,7 @@
         loadNotices();
       } catch (error) {
         console.error('Failed to publish notice:', error);
-<<<<<<< HEAD
-        showMessage('nMsg', `❌ Failed to publish: ${error.message}`, 'err');
-=======
-        showMessage('nMsg', ` Failed to publish: ${error.message}`, 'err');
->>>>>>> ffe8e6a (Initial commit)
+        showMessage('nMsg', `Failed to publish: ${error.message}`, 'err');
       }
     }
 
@@ -1270,11 +1156,7 @@
       const rows = document.getElementById('tutRows');
       if (!rows) return;
       
-<<<<<<< HEAD
-      rows.innerHTML = '<tr><td colspan="6" class="note info" style="text-align:center;padding:20px;">🔄 Loading tutorials...</td></tr>';
-=======
       rows.innerHTML = '<tr><td colspan="6" class="note info" style="text-align:center;padding:20px;">Loading tutorials...</td></tr>';
->>>>>>> ffe8e6a (Initial commit)
       
       try {
         const response = await fetch(API('/api/tutorials?limit=100'), { 
@@ -1285,11 +1167,7 @@
         if (!Array.isArray(data)) throw new Error('Invalid response format');
         
         if (!data.length) {
-<<<<<<< HEAD
-          rows.innerHTML = '<tr><td colspan="6" class="note info" style="text-align:center;padding:20px;">📚 No tutorials found. Create your first tutorial above!</td></tr>';
-=======
-          rows.innerHTML = '<tr><td colspan="6" class="note info" style="text-align:center;padding:20px;"> No tutorials found. Create your first tutorial above!</td></tr>';
->>>>>>> ffe8e6a (Initial commit)
+          rows.innerHTML = '<tr><td colspan="6" class="note info" style="text-align:center;padding:20px;">No tutorials found. Create your first tutorial above!</td></tr>';
           return;
         }
         
@@ -1298,21 +1176,12 @@
             <td style="font-weight:600;">${tutorial.title}</td>
             <td>
               <span class="status-indicator status-active">
-<<<<<<< HEAD
-                ${tutorial.category === 'sensor' ? '📊' : 
-                  tutorial.category === 'communication' ? '📡' : 
-                  tutorial.category === 'automation' ? '🏠' : 
-                  tutorial.category === 'ai-ml' ? '🤖' : 
-                  tutorial.category === 'robotics' ? '🦾' : 
-                  tutorial.category === 'energy' ? '⚡' : '🔧'} 
-=======
                 ${tutorial.category === 'sensor' ? '' : 
                   tutorial.category === 'communication' ? '' : 
                   tutorial.category === 'automation' ? '' : 
                   tutorial.category === 'ai-ml' ? '' :
                   tutorial.category === 'robotics' ? '' : 
                   tutorial.category === 'energy' ? '' : ''} 
->>>>>>> ffe8e6a (Initial commit)
                 ${(tutorial.category || 'general').toUpperCase()}
               </span>
             </td>
@@ -1321,39 +1190,23 @@
                 tutorial.difficulty === 'beginner' ? 'status-active' : 
                 tutorial.difficulty === 'intermediate' ? 'status-warning' : 'status-inactive'
               }">
-<<<<<<< HEAD
-                ${tutorial.difficulty === 'beginner' ? '🟢' : 
-                  tutorial.difficulty === 'intermediate' ? '🟡' : '🔴'} 
-=======
                 ${tutorial.difficulty === 'beginner' ? '' : 
                   tutorial.difficulty === 'intermediate' ? '' : ''} 
->>>>>>> ffe8e6a (Initial commit)
                 ${(tutorial.difficulty || 'beginner').toUpperCase()}
               </span>
             </td>
             <td><time datetime="${tutorial.createdAt}">${fmtDate(tutorial.createdAt)}</time></td>
-<<<<<<< HEAD
-            <td><span class="status-indicator status-active">🟢 ACTIVE</span></td>
-            <td>
-              <button class="btn danger" data-delt="${tutorial._id}" title="Delete this tutorial">
-                <span>🗑️</span> Delete
-=======
-            <td><span class="status-indicator status-active"> ACTIVE</span></td>
+            <td><span class="status-indicator status-active">ACTIVE</span></td>
             <td>
               <button class="btn danger" data-delt="${tutorial._id}" title="Delete this tutorial">
                  Delete
->>>>>>> ffe8e6a (Initial commit)
               </button>
             </td>
           </tr>
         `).join('');
       } catch (error) {
         console.error('Failed to load tutorials:', error);
-<<<<<<< HEAD
-        rows.innerHTML = '<tr><td colspan="6" class="note err" style="text-align:center;padding:20px;">❌ Failed to load tutorials. Please try again.</td></tr>';
-=======
-        rows.innerHTML = '<tr><td colspan="6" class="note err" style="text-align:center;padding:20px;"> Failed to load tutorials. Please try again.</td></tr>';
->>>>>>> ffe8e6a (Initial commit)
+        rows.innerHTML = '<tr><td colspan="6" class="note err" style="text-align:center;padding:20px;">Failed to load tutorials. Please try again.</td></tr>';
       }
     }
 
@@ -1404,11 +1257,7 @@
         const validTypes = ['image/svg+xml', 'image/png', 'image/jpeg', 'image/webp'];
         if (!validTypes.includes(archFile.type)) {
           modal.open({
-<<<<<<< HEAD
-            titleText: '❌ Invalid File Type',
-=======
-            titleText: ' Invalid File Type',
->>>>>>> ffe8e6a (Initial commit)
+            titleText: 'Invalid File Type',
             html: '<p>Architecture diagram must be SVG, PNG, JPG, or WebP format.</p>',
             size: 'sm'
           });
@@ -1417,11 +1266,7 @@
         
         if (archFile.size > 5 * 1024 * 1024) {
           modal.open({
-<<<<<<< HEAD
-            titleText: '❌ File Too Large',
-=======
-            titleText: ' File Too Large',
->>>>>>> ffe8e6a (Initial commit)
+            titleText: 'File Too Large',
             html: '<p>Architecture diagram file is too large (max 5 MB).</p>',
             size: 'sm'
           });
@@ -1442,11 +1287,7 @@
         elements.tags.value.split(',').map(s => s.trim()).filter(Boolean) : [];
 
       try {
-<<<<<<< HEAD
-        showMessage('tMsg', '🚀 Publishing tutorial...', 'info');
-=======
-        showMessage('tMsg', ' Publishing tutorial...', 'info');
->>>>>>> ffe8e6a (Initial commit)
+        showMessage('tMsg', 'Publishing tutorial...', 'info');
         
         const payload = {
           title: elements.title.value.trim(),
@@ -1482,11 +1323,7 @@
           throw new Error(data?.error || text || `HTTP ${response.status}`);
         }
         
-<<<<<<< HEAD
-        showMessage('tMsg', '✅ Tutorial published successfully!', 'ok');
-=======
-        showMessage('tMsg', ' Tutorial published successfully!', 'ok');
->>>>>>> ffe8e6a (Initial commit)
+        showMessage('tMsg', 'Tutorial published successfully!', 'ok');
         
         // Clear form
         Object.values(elements).forEach(element => {
@@ -1500,11 +1337,7 @@
         loadTutorials();
       } catch (error) {
         console.error('Failed to add tutorial:', error);
-<<<<<<< HEAD
-        showMessage('tMsg', `❌ Failed to publish: ${error.message}`, 'err');
-=======
-        showMessage('tMsg', ` Failed to publish: ${error.message}`, 'err');
->>>>>>> ffe8e6a (Initial commit)
+        showMessage('tMsg', `Failed to publish: ${error.message}`, 'err');
       }
     }
 
@@ -1513,13 +1346,8 @@
       const rows = document.getElementById('projRows');
       if (!rows) return;
       
-<<<<<<< HEAD
-      rows.innerHTML = '<tr><td colspan="5" class="note info" style="text-align:center;padding:20px;">🔄 Loading projects...</td></tr>';
-      
-=======
       rows.innerHTML = '<tr><td colspan="5" class="note info" style="text-align:center;padding:20px;">Loading projects...</td></tr>';
-    
->>>>>>> ffe8e6a (Initial commit)
+      
       try {
         const response = await fetch(API('/api/projects'));
         const data = await response.json();
@@ -1529,11 +1357,7 @@
         if (!Array.isArray(data)) throw new Error('Invalid response format');
         
         if (!data.length) {
-<<<<<<< HEAD
-          rows.innerHTML = '<tr><td colspan="6" class="note info" style="text-align:center;padding:20px;">🎨 No projects found. Add your first project above!</td></tr>';
-=======
-          rows.innerHTML = '<tr><td colspan="6" class="note info" style="text-align:center;padding:20px;"> No projects found. Add your first project above!</td></tr>';
->>>>>>> ffe8e6a (Initial commit)
+          rows.innerHTML = '<tr><td colspan="6" class="note info" style="text-align:center;padding:20px;">No projects found. Add your first project above!</td></tr>';
           return;
         }
         
@@ -1543,19 +1367,11 @@
               <td style="font-weight:600;">${project.title}</td>
               <td>
                 <span class="status-indicator status-active">
-<<<<<<< HEAD
-                  ${project.track === 'IoT' ? '🌐' : 
-                    project.track === 'AI' ? '🤖' : 
-                    project.track === 'Robotics' ? '🦾' : 
-                    project.track === 'Web' ? '💻' : 
-                    project.track === 'Mobile' ? '📱' : '🔧'} 
-=======
                   ${project.track === 'IoT' ? '' : 
                     project.track === 'AI' ? '' : 
                     project.track === 'Robotics' ? '' : 
                     project.track === 'Web' ? '' : 
                     project.track === 'Mobile' ? '' : ''} 
->>>>>>> ffe8e6a (Initial commit)
                   ${project.track || 'General'}
                 </span>
               </td>
@@ -1565,11 +1381,7 @@
                   `<a href="${project.url}" target="_blank" rel="noopener noreferrer" 
                      style="color: var(--mag); text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 4px; max-width: 100%; overflow: hidden; text-overflow: ellipsis;"
                      title="${project.url}">
-<<<<<<< HEAD
-                    🔗 ${project.url.length > 30 ? project.url.substring(0, 30) + '...' : project.url}
-=======
                      ${project.url.length > 30 ? project.url.substring(0, 30) + '...' : project.url}
->>>>>>> ffe8e6a (Initial commit)
                   </a>` : 
                   '<em style="color:var(--muted);">No URL</em>'
                 }
@@ -1586,11 +1398,7 @@
               </td>
               <td>
                 <button class="btn danger" data-delp="${project._id}" title="Delete this project">
-<<<<<<< HEAD
-                  <span>🗑️</span> Delete
-=======
                    Delete
->>>>>>> ffe8e6a (Initial commit)
                 </button>
               </td>
             </tr>
@@ -1598,7 +1406,7 @@
         }).join('');
       } catch (error) {
         console.error('Failed to load projects:', error);
-        rows.innerHTML = '<tr><td colspan="6" class="note err" style="text-align:center;padding:20px;">❌ Failed to load projects. Please try again.</td></tr>';
+        rows.innerHTML = '<tr><td colspan="6" class="note err" style="text-align:center;padding:20px;">Failed to load projects. Please try again.</td></tr>';
       }
     }
 
@@ -1656,11 +1464,7 @@
         
         if (!validTypes.includes(file.type)) {
           modal.open({
-<<<<<<< HEAD
-            titleText: '❌ Invalid File Type',
-=======
-            titleText: ' Invalid File Type',
->>>>>>> ffe8e6a (Initial commit)
+            titleText: 'Invalid File Type',
             html: '<p>Project image must be PNG, JPG, or WebP format.</p>',
             size: 'sm'
           });
@@ -1669,11 +1473,7 @@
         
         if (file.size > 5 * 1024 * 1024) {
           modal.open({
-<<<<<<< HEAD
-            titleText: '❌ File Too Large',
-=======
-            titleText: ' File Too Large',
->>>>>>> ffe8e6a (Initial commit)
+            titleText: 'File Too Large',
             html: '<p>Project image file is too large (max 5 MB).</p>',
             size: 'sm'
           });
@@ -1684,11 +1484,7 @@
       }
 
       try {
-<<<<<<< HEAD
-        showMessage('pMsg', '🎨 Adding to gallery...', 'info');
-=======
-        showMessage('pMsg', ' Adding to gallery...', 'info');
->>>>>>> ffe8e6a (Initial commit)
+        showMessage('pMsg', 'Adding to gallery...', 'info');
         
         const response = await fetch(API('/api/projects'), { 
           method: 'POST', 
@@ -1702,11 +1498,7 @@
           localStorage.removeItem('kg_user');
           
           modal.open({
-<<<<<<< HEAD
-            titleText: '🔐 Session Expired',
-=======
-            titleText: ' Session Expired',
->>>>>>> ffe8e6a (Initial commit)
+            titleText: 'Session Expired',
             html: '<p>Your session has expired. Please login again to continue.</p>',
             size: 'sm',
             buttons: [
@@ -1739,11 +1531,7 @@
           throw new Error(payload?.error || text || `HTTP ${response.status}`);
         }
         
-<<<<<<< HEAD
-        showMessage('pMsg', '✅ Project added to gallery successfully!', 'ok');
-=======
-        showMessage('pMsg', ' Project added to gallery successfully!', 'ok');
->>>>>>> ffe8e6a (Initial commit)
+        showMessage('pMsg', 'Project added to gallery successfully!', 'ok');
         
         // Clear form
         Object.values(elements).forEach(element => {
@@ -1760,11 +1548,7 @@
         
       } catch (error) {
         console.error('Failed to add project:', error);
-<<<<<<< HEAD
-        showMessage('pMsg', `❌ Failed to add project: ${error.message}`, 'err');
-=======
-        showMessage('pMsg', ` Failed to add project: ${error.message}`, 'err');
->>>>>>> ffe8e6a (Initial commit)
+        showMessage('pMsg', `Failed to add project: ${error.message}`, 'err');
       }
     }
 
@@ -1857,11 +1641,7 @@
 
     document.getElementById('logoutBtn')?.addEventListener('click', () => {
       modal.open({
-<<<<<<< HEAD
-        titleText: '🚪 Logout Confirmation',
-=======
-        titleText: ' Logout Confirmation',
->>>>>>> ffe8e6a (Initial commit)
+        titleText: 'Logout Confirmation',
         html: '<p>Are you sure you want to logout from the admin panel?</p>',
         size: 'sm',
         buttons: [
@@ -1888,15 +1668,9 @@
       loadProjects(), 
       loadTutorials()
     ]).then(() => {
-<<<<<<< HEAD
-      console.log('✅ Admin dashboard loaded successfully');
+      console.log('Admin dashboard loaded successfully');
     }).catch(error => {
-      console.error('❌ Failed to load dashboard data:', error);
-=======
-      console.log(' Admin dashboard loaded successfully');
-    }).catch(error => {
-      console.error(' Failed to load dashboard data:', error);
->>>>>>> ffe8e6a (Initial commit)
+      console.error('Failed to load dashboard data:', error);
     });
 
     // Enhanced error handling
@@ -1904,11 +1678,7 @@
       console.error('Global error:', e.error);
       
       modal.open({
-<<<<<<< HEAD
-        titleText: '⚠️ Unexpected Error',
-=======
-        titleText: ' Unexpected Error',
->>>>>>> ffe8e6a (Initial commit)
+        titleText: 'Unexpected Error',
         html: '<p>An unexpected error occurred. Please refresh the page if the problem persists.</p>',
         size: 'sm'
       });
