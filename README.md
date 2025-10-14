@@ -41,7 +41,7 @@ npm start
 Static files in `public/` folder. Configure the frontend to reach backend by adding:
 
 ```html
-<script>window.API_BASE='';</script>
+<script>window.API_BASE='https://iot-cloud-server-main.onrender.com';</script>
 ```
 
 (Empty string assumes same origin.)

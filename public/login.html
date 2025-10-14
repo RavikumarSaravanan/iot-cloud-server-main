@@ -79,7 +79,7 @@
       });
 
     // Enhanced config
-    const API_BASE = window.location.origin;
+    const API_BASE = window.API_BASE || 'https://iot-cloud-server-main.onrender.com';
     addDebug('API Base URL: ' + API_BASE);
 
     // If already logged in, try to verify and redirect to admin
