@@ -138,3 +138,25 @@ sudo systemctl enable --now kg
 - Serve through Nginx with HSTS for public domains.
 ```)
 "# iot-cloud-server-main" 
+
+
+-------
+
+app.use(cors({
+  origin: process.env.CORS_ORIGIN,
+  credentials: true
+}));
+
+CORS_ORIGIN=https://knowledgegarden-egs.netlify.app,http://localhost:3000
+const API_BASE = window.API_BASE || 'https://iot-cloud-server-main.onrender.com';app.use(cors({
+  origin: process.env.CORS_ORIGIN,
+  credentials: true
+}));
+const API_BASE = window.location.origin;
+<script>
+  window.API_BASE = 'https://iot-cloud-server-main.onrender.com';
+</script>
+/admin     /admin.html    200
+/login     /login.html    200
+/*         /index.html    200
+

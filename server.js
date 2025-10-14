@@ -40,9 +40,19 @@ app.use(cookieParser(process.env.COOKIE_SECRET || 'changeme'));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads'), { maxAge: '7d', immutable: true }));
 
 // --- CORS ---
-const corsOrigin = process.env.CORS_ORIGIN || '*';
+const cors = require('cors');
+const allowedOrigins = process.env.CORS_ORIGIN.split(',');
+
 app.use(cors({
-  origin: process.env.CORS_ORIGIN,
+  origin: function(origin, callback) {
+    // Allow requests with no origin (like curl or Postman)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    } else {
+      return callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true
 }));// --- API routes with rate limit ---
 app.use('/api', apiLimiter);
