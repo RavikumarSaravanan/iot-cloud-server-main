@@ -41,7 +41,7 @@ npm start
 Static files in `public/` folder. Configure the frontend to reach backend by adding:
 
 ```html
-<script>window.API_BASE='https://iot-cloud-server-main.onrender.com';</script>
+<script>window.API_BASE='';</script>
 ```
 
 (Empty string assumes same origin.)
@@ -148,13 +148,13 @@ app.use(cors({
 }));
 
 CORS_ORIGIN=https://knowledgegarden-egs.netlify.app,http://localhost:3000
-const API_BASE = window.API_BASE || 'https://iot-cloud-server-main.onrender.com';app.use(cors({
+const API_BASE = window.API_BASE || '';app.use(cors({
   origin: process.env.CORS_ORIGIN,
   credentials: true
 }));
 const API_BASE = window.location.origin;
 <script>
-  window.API_BASE = 'https://iot-cloud-server-main.onrender.com';
+  window.API_BASE = '';
 </script>
 /admin     /admin.html    200
 /login     /login.html    200

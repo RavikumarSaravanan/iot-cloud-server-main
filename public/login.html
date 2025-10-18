@@ -6,7 +6,7 @@
   <title>Knowledge Garden — Admin Login</title>
   <meta name="description" content="Admin login for Knowledge Garden." />
   <script>
-  window.API_BASE = 'https://iot-cloud-server-main.onrender.com';
+  window.API_BASE = '';
 </script>
   <style>
     :root{ --navy:#0A2E6F; --mag:#FF2B7A; --border:#e5e7eb; --muted:#64748b; }
@@ -79,7 +79,7 @@
       });
 
     // Enhanced config
-    const API_BASE = window.API_BASE || 'https://iot-cloud-server-main.onrender.com';
+    const API_BASE = window.API_BASE || '';
     addDebug('API Base URL: ' + API_BASE);
 
     // If already logged in, try to verify and redirect to admin

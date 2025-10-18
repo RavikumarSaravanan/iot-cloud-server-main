@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <script>
-  window.API_BASE = 'https://iot-cloud-server-main.onrender.com';
+  window.API_BASE = '';
 </script>
   <style>
     :root{
@@ -630,7 +630,7 @@
   </header>
 
   <main class="grid">
-    <!-- Enhanced Tutorials Section -->
+   // Enhanced Tutorials Section 
     <section class="card">
       <div class="title">
         <span></span> Tutorial Management
@@ -739,7 +739,7 @@
       </div>
     </section>
 
-    <!-- Enhanced Notifications Section -->
+ //Enhanced Notifications Section 
     <section class="card">
       <div class="title">
         <span></span> Event & Notification Management
@@ -809,7 +809,7 @@
       </div>
     </section>
 
-    <!-- Enhanced Projects Section -->
+// Enhanced Projects Section 
     <section class="card">
       <div class="title">
          Project Gallery Management
@@ -907,7 +907,7 @@
     </section>
   </main>
 
-  <!-- Enhanced Modal -->
+  // Enhanced Modal 
   <div class="modal" id="modalRoot" aria-modal="true" role="dialog" aria-labelledby="modalTitle" hidden>
     <div class="modal-card md" id="modalCard">
       <div class="modal-head">
@@ -1220,130 +1220,320 @@
         fileReader.readAsDataURL(file);
       });
     }
-
+// ... existing code ...
     async function addTutorial() {
-      const elements = {
-        title: document.getElementById('tTitle'),
-        description: document.getElementById('tDesc'),
-        category: document.getElementById('tCategory'),
-        difficulty: document.getElementById('tDifficulty'),
-        components: document.getElementById('tComponents'),
-        codeSnippet: document.getElementById('tCode'),
-        estimatedTime: document.getElementById('tEstimatedTime'),
-        author: document.getElementById('tAuthor'),
-        tags: document.getElementById('tTags'),
-        architecture: document.getElementById('tArch')
+      console.log('addTutorial function called');
+      
+      // Get form values directly
+      const title = document.getElementById('tTitle')?.value.trim();
+      const category = document.getElementById('tCategory')?.value;
+      const difficulty = document.getElementById('tDifficulty')?.value;
+      const description = document.getElementById('tDesc')?.value.trim();
+      const codeSnippet = document.getElementById('tCode')?.value.trim();
+      const estimatedTime = document.getElementById('tEstimatedTime')?.value.trim();
+      const author = document.getElementById('tAuthor')?.value.trim();
+      const components = document.getElementById('tComponents')?.value.trim();
+      const tags = document.getElementById('tTags')?.value.trim();
+
+      // Enhanced validation
+      if (!title) {
+        showMessage('tMsg', 'Tutorial title is required', 'err');
+        document.getElementById('tTitle')?.focus();
+        return;
+      }
+      
+      if (!category) {
+        showMessage('tMsg', 'Please select a category', 'err');
+        document.getElementById('tCategory')?.focus();
+        return;
+      }
+      
+      if (!difficulty) {
+        showMessage('tMsg', 'Please select a difficulty level', 'err');
+        document.getElementById('tDifficulty')?.focus();
+        return;
+      }
+      
+      if (!description) {
+        showMessage('tMsg', 'Tutorial description is required', 'err');
+        document.getElementById('tDesc')?.focus();
+        return;
+      }
+      
+      if (!codeSnippet) {
+        showMessage('tMsg', 'Source code is required', 'err');
+        document.getElementById('tCode')?.focus();
+        return;
+      }
+
+      // Prepare tutorial data as JSON
+      const tutorialData = {
+        title,
+        category,
+        difficulty,
+        description,
+        codeSnippet
       };
       
-      // Enhanced validation
-      const requiredFields = [
-        { element: elements.title, name: 'title', message: 'Tutorial title is required' },
-        { element: elements.description, name: 'description', message: 'Tutorial description is required' },
-        { element: elements.category, name: 'category', message: 'Please select a category' },
-        { element: elements.difficulty, name: 'difficulty', message: 'Please select difficulty level' },
-        { element: elements.codeSnippet, name: 'code', message: 'Source code is required' }
-      ];
-      
-      for (const field of requiredFields) {
-        if (!field.element.value.trim()) {
-          showMessage('tMsg', field.message, 'err');
-          field.element.focus();
-          return;
-        }
+      // Add optional fields if they have values
+      if (estimatedTime) {
+        tutorialData.estimatedTime = estimatedTime;
       }
-
-      const archFile = elements.architecture.files?.[0];
-      let architecture = '';
       
-      if (archFile) {
-        const validTypes = ['image/svg+xml', 'image/png', 'image/jpeg', 'image/webp'];
-        if (!validTypes.includes(archFile.type)) {
-          modal.open({
-            titleText: 'Invalid File Type',
-            html: '<p>Architecture diagram must be SVG, PNG, JPG, or WebP format.</p>',
-            size: 'sm'
-          });
-          return;
-        }
-        
-        if (archFile.size > 5 * 1024 * 1024) {
-          modal.open({
-            titleText: 'File Too Large',
-            html: '<p>Architecture diagram file is too large (max 5 MB).</p>',
-            size: 'sm'
-          });
-          return;
-        }
-        
-        try {
-          architecture = await readFileAsDataURL(archFile);
-        } catch (error) {
-          showMessage('tMsg', `Failed to read architecture file: ${error.message}`, 'err');
-          return;
-        }
+      if (author) {
+        tutorialData.author = author;
       }
-
-      const components = elements.components.value.trim() ? 
-        elements.components.value.split(',').map(s => s.trim()).filter(Boolean) : [];
-      const tags = elements.tags.value.trim() ? 
-        elements.tags.value.split(',').map(s => s.trim()).filter(Boolean) : [];
+      
+      if (components) {
+        tutorialData.components = components.split(',').map(item => item.trim());
+      }
+      
+      if (tags) {
+        tutorialData.tags = tags.split(',').map(tag => tag.trim());
+      }
+      
+      console.log('Tutorial data being sent:', tutorialData);
 
       try {
         showMessage('tMsg', 'Publishing tutorial...', 'info');
         
-        const payload = {
-          title: elements.title.value.trim(),
-          description: elements.description.value.trim(),
-          category: elements.category.value,
-          difficulty: elements.difficulty.value,
-          components,
-          codeSnippet: elements.codeSnippet.value,
-          architecture,
-          estimatedTime: elements.estimatedTime.value.trim() || undefined,
-          author: elements.author.value.trim() || undefined,
-          tags
-        };
-        
-        const response = await fetch(API('/api/tutorials'), {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', ...authHeaders() },
-          body: JSON.stringify(payload)
+        const response = await fetch(API('/api/tutorials'), { 
+          method: 'POST', 
+          headers: { 
+            'Content-Type': 'application/json',
+            ...authHeaders() 
+          }, 
+          body: JSON.stringify(tutorialData)
         });
         
-        let data = null;
+        console.log('Tutorial response status:', response.status);
+        
+        // Handle authentication errors
+        if (response.status === 401 || response.status === 403) {
+          localStorage.removeItem('kg_token');
+          localStorage.removeItem('kg_user');
+          
+          modal.open({
+            titleText: 'Session Expired',
+            html: '<p>Your session has expired. Please login again to continue.</p>',
+            size: 'sm',
+            buttons: [
+              { 
+                text: 'Go to Login', 
+                variant: 'primary',
+                onClick: () => {
+                  location.href = '/login.html';
+                }
+              }
+            ]
+          });
+          throw new Error('Authentication required');
+        }
+        
+        let payload = null;
         let text = '';
         
         try { 
-          data = await response.json(); 
+          payload = await response.json(); 
+          console.log('Tutorial response data:', payload);
         } catch { 
           try { 
             text = await response.text(); 
+            console.log('Tutorial response text:', text);
           } catch { } 
         }
         
         if (!response.ok) {
-          throw new Error(data?.error || text || `HTTP ${response.status}`);
+          throw new Error(payload?.error || text || `HTTP ${response.status}`);
         }
         
         showMessage('tMsg', 'Tutorial published successfully!', 'ok');
         
         // Clear form
-        Object.values(elements).forEach(element => {
-          if (element.type === 'file') {
-            element.value = '';
-          } else {
-            element.value = '';
-          }
-        });
+        document.getElementById('tTitle').value = '';
+        document.getElementById('tCategory').value = '';
+        document.getElementById('tDifficulty').value = '';
+        document.getElementById('tDesc').value = '';
+        document.getElementById('tCode').value = '';
+        document.getElementById('tEstimatedTime').value = '';
+        document.getElementById('tAuthor').value = '';
+        document.getElementById('tComponents').value = '';
+        document.getElementById('tTags').value = '';
         
-        loadTutorials();
+        // Reload tutorials to see the new entry
+        setTimeout(() => {
+          loadTutorials();
+        }, 1000);
+        
       } catch (error) {
         console.error('Failed to add tutorial:', error);
-        showMessage('tMsg', `Failed to publish: ${error.message}`, 'err');
+        showMessage('tMsg', `Failed to publish tutorial: ${error.message}`, 'err');
       }
     }
+// // ... existing code ...
+//     async function addTutorial() {
+//       const elements = {
+//         title: document.getElementById('tTitle'),
+//         category: document.getElementById('tCategory'),
+//         difficulty: document.getElementById('tDifficulty'),
+//         description: document.getElementById('tDesc'),
+//         codeSnippet: document.getElementById('tCode'),
+//         estimatedTime: document.getElementById('tEstimatedTime'),
+//         author: document.getElementById('tAuthor'),
+//         components: document.getElementById('tComponents'),
+//         tags: document.getElementById('tTags'),
+//         image: document.getElementById('tArch')
+//       };
+//       // Enhanced validation
+//       if (!elements.title || !elements.title.value.trim()) {
+//         showMessage('tMsg', 'Tutorial title is required', 'err');
+//         elements.title?.focus();
+//         return;
+//       }
+      
+//       if (!elements.category || !elements.category.value) {
+//         showMessage('tMsg', 'Please select a category', 'err');
+//         elements.category?.focus();
+//         return;
+//       }
+      
+//       if (!elements.difficulty || !elements.difficulty.value) {
+//         showMessage('tMsg', 'Please select a difficulty level', 'err');
+//         elements.difficulty?.focus();
+//         return;
+//       }
+      
+//       if (!elements.description || !elements.description.value.trim()) {
+//         showMessage('tMsg', 'Tutorial description is required', 'err');
+//         elements.description?.focus();
+//         return;
+//       }
+      
+//       if (!elements.codeSnippet || !elements.codeSnippet.value.trim()) {
+//         showMessage('tMsg', 'Source code is required', 'err');
+//         elements.codeSnippet?.focus();
+//         return;
+//       }
+//       const formData = new FormData();
+//       formData.append('title', elements.title.value.trim());
+//       formData.append('category', elements.category.value);
+//       formData.append('difficulty', elements.difficulty.value);
+//       formData.append('description', elements.description.value.trim());
+//       formData.append('codeSnippet', elements.codeSnippet.value.trim());
+      
+//       if (elements.estimatedTime && elements.estimatedTime.value.trim()) {
+//         formData.append('estimatedTime', elements.estimatedTime.value.trim());
+//       }
+      
+//       if (elements.author && elements.author.value.trim()) {
+//         formData.append('author', elements.author.value.trim());
+//       }
+      
+//       if (elements.components && elements.components.value.trim()) {
+//         formData.append('components', elements.components.value.trim());
+//       }
+      
+//       if (elements.tags && elements.tags.value.trim()) {
+//         formData.append('tags', elements.tags.value.trim());
+//       }
 
-        // Enhanced projects management
+//       if (elements.image.files && elements.image.files[0]) {
+//         const file = elements.image.files[0];
+//         const validTypes = ['image/svg+xml', 'image/png', 'image/jpeg', 'image/webp'];
+        
+//         if (!validTypes.includes(file.type)) {
+//           modal.open({
+//             titleText: 'Invalid File Type',
+//             html: '<p>Architecture diagram must be SVG, PNG, JPG, or WebP format.</p>',
+//             size: 'sm'
+//           });
+//           return;
+//         }
+        
+//         if (file.size > 5 * 1024 * 1024) {
+//           modal.open({
+//             titleText: 'File Too Large',
+//             html: '<p>Architecture diagram file is too large (max 5 MB).</p>',
+//             size: 'sm'
+//           });
+//           return;
+//         }
+        
+//         formData.append('image', file);
+//       }
+
+//       try {
+//         showMessage('tMsg', 'Publishing tutorial...', 'info');
+        
+//         const response = await fetch(API('/api/tutorials'), { 
+//           method: 'POST', 
+//           headers: { ...authHeaders() }, 
+//           body: formData 
+//         });
+
+//         // Handle authentication errors
+//         if (response.status === 401 || response.status === 403) {
+//           localStorage.removeItem('kg_token');
+//           localStorage.removeItem('kg_user');
+          
+//           modal.open({
+//             titleText: 'Session Expired',
+//             html: '<p>Your session has expired. Please login again to continue.</p>',
+//             size: 'sm',
+//             buttons: [
+//               { 
+//                 text: 'Go to Login', 
+//                 variant: 'primary',
+//                 onClick: () => {
+//                   location.href = '/login.html';
+//                 }
+//               }
+//             ]
+//           });
+//           throw new Error('Authentication required');
+//         }
+        
+//         let payload = null;
+//         let text = '';
+        
+//         try { 
+//           payload = await response.json(); 
+//           console.log('Server response:', payload);
+//         } catch { 
+//           try { 
+//             text = await response.text(); 
+//             console.log('Server response (text):', text);
+//           } catch { } 
+//         }
+        
+//         if (!response.ok) {
+//           throw new Error(payload?.error || text || `HTTP ${response.status}`);
+//         }
+        
+//         showMessage('tMsg', 'Tutorial published successfully!', 'ok');
+        
+//         // Clear form
+//         Object.values(elements).forEach(element => {
+//           if (element && element.type === 'file') {
+//             element.value = '';
+//           } else if (element && element.value !== undefined) {
+//             element.value = '';
+//           }
+//         });
+        
+//         // Reload tutorials to see the new entry
+//         setTimeout(() => {
+//           loadTutorials();
+//         }, 1000);
+        
+//       } catch (error) {
+//         console.error('Failed to add tutorial:', error);
+//         showMessage('tMsg', `Failed to publish tutorial: ${error.message}`, 'err');
+//       }
+//     }
+
+
+    // Enhanced projects management
     async function loadProjects() {
       const rows = document.getElementById('projRows');
       if (!rows) return;
@@ -1688,4 +1878,4 @@
 
   </script>
 </body>
-</html>
+</html> 

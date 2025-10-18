@@ -1,4 +1,4 @@
-const API_BASE = 'https://iot-cloud-server-main.onrender.com';
+const API_BASE = '';
 const CACHE_NAME = 'knowledge-garden-v1';
 const urlsToCache = [
   '/',

@@ -18,7 +18,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <script>window.API_BASE='https://iot-cloud-server-main.onrender.com';</script>
+  <script>window.API_BASE='';</script>
   <style>
     :root{ 
       --brand-navy:#0A2E6F; 
@@ -1418,150 +1418,6 @@
         transform: translateX(0);
       }
     }
-    /* Add to your CSS file */
-.footer-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  background: #22398a;
-  color: #fff;
-  padding: 40px 20px 20px 20px;
-}
-.footer-section {
-  flex: 1 1 180px;
-  margin: 0 20px;
-}
-.footer-section h3 {
-  margin-bottom: 8px;
-  color: #fff;
-}
-.footer-section hr {
-  border: 1px solid #ff4b7d;
-  width: 40px;
-  margin-left: 0;
-}
-.footer-section ul {
-  list-style: none;
-  padding: 0;
-}
-.footer-section ul li {
-  margin-bottom: 8px;
-}
-.footer-section ul li a {
-  color: #fff;
-  text-decoration: none;
-}
-.footer-section ul li a:hover {
-  text-decoration: underline;
-}
-.footer-bottom {
-  text-align: center;
-  padding: 16px 0 0 0;
-  color: #bfc9e0;
-  font-size: 14px;
-  background: #22398a;
-}
-.stats-section {
-  display: flex;
-  justify-content: center;
-  gap: 32px;
-  margin: 40px 0;
-  background: #f7fafd;
-  padding: 32px 0;
-}
-.stat-card {
-  background: #fff;
-  border-radius: 16px;
-  box-shadow: 0 2px 12px rgba(34, 57, 138, 0.04);
-  padding: 32px 40px;
-  text-align: center;
-  min-width: 240px;
-}
-.stat-title {
-  color: #22398a;
-  font-size: 16px;
-  margin-bottom: 8px;
-  font-weight: 500;
-}
-.stat-value {
-  color: #22398a;
-  font-size: 40px;
-  font-weight: bold;
-  margin-bottom: 8px;
-}
-.stat-desc {
-  color: #4b5e8e;
-  font-size: 15px;
-}
-@media (max-width: 900px) {
-  .stats-section {
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-  }
-  .stat-card {
-    min-width: 200px;
-    width: 90%;
-  }
-}
-.hero-card {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: #fff;
-  border-radius: 18px;
-  box-shadow: 0 2px 16px rgba(34, 57, 138, 0.06);
-  padding: 32px 40px;
-  margin-bottom: 32px;
-  max-width:auto ;
-  max-height: auto;
-
-}
-.hero-content {
-  flex: 1 1 60%;
-}
-.hero-slideshow {
-  flex: 1 1 40%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.hero-slideshow img {
-  width:100%;
-  height: 100%;
-  object-fit: contain;
-  border-radius: 16px;
-  box-shadow: 0 2px 12px rgba(34, 57, 138, 0.08);
-  background: #f7fafd;
-  margin-bottom: 12px;
-}
-.slide-dots {
-  display: flex;
-  gap: 8px;
-  justify-content: center;
-}
-.slide-dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: #bfc9e0;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-.slide-dot.active {
-  background: #22398a;
-}
-@media (max-width: 900px) {
-  .hero-card {
-    flex-direction: column;
-    padding: 20px 10px;
-  }
-  .hero-slideshow img {
-    width: 100%;
-    height: 80%;
-  }
-}
-
 
 
 
@@ -1621,13 +1477,12 @@
           </button>
         </div>
       </div>
-      <div class="hero-card">
-
-  <div class="hero-slideshow">
-    <img id="heroSlideImg" src="logo.jpeg" alt="Slideshow" />
-    <div class="slide-dots" id="slideDots"></div>
-  </div>
-</div>
+      <div class="hero-card" aria-hidden="true">
+        <img src="logo.jpeg" alt="Knowledge Garden Innovation" loading="lazy"/>
+        
+            
+        <span class="hero-badge">Tech Society • Since 2025</span>
+      </div>
 
       <!-- Enhanced Join Modal -->
       <div class="modal" id="joinModal" aria-modal="true" role="dialog" aria-labelledby="joinModalTitle">
@@ -1681,31 +1536,9 @@
         </div>
       </div>
     </header>
-    <!-- Enhanced Notifications Section -->
-    <section id="notifications" class="section-box" aria-labelledby="notif-title">
-      <h2 id="notif-title"> Community Updates</h2>
-      <p style="color:var(--muted);font-size:18px;margin-bottom:24px;">
-        Stay connected with the latest events, workshops, competitions, and opportunities in our IoT community.
-      </p>
-
-      <div class="notice-tools" role="toolbar" aria-label="Notice filters">
-        <input id="noticeSearch" type="search" placeholder=" Search events, workshops, competitions..." aria-label="Search notices" />
-        <button class="chip active" data-cat="all" aria-pressed="true">All Updates</button>
-        <button class="chip" data-cat="event" aria-pressed="false"> Events</button>
-        <button class="chip" data-cat="workshop" aria-pressed="false"> Workshops</button>
-        <button class="chip" data-cat="competition" aria-pressed="false"> Competitions</button>
-        <button class="chip" data-today="true" aria-pressed="false"> Today</button>
-      </div>
-
-      <div class="notice-list" id="noticeList" aria-live="polite">
-        <div class="note info">Loading community updates...</div>
-      </div>
-      <div id="noticeError" class="note error" role="alert" style="display:none;"></div>
-      <div id="noticeHint" class="note info"><strong>Tip:</strong> Use the search and filters above to find specific events or topics that interest you.</div>
-    </section>
     
     
-    <!-- Enhanced Community Stats Section
+    <!-- Enhanced Community Stats Section -->
     <section id="stats" class="section-box" aria-labelledby="stats-title">
       <h2 id="stats-title"> Our Growing Community</h2>
       <p style="color:var(--muted);font-size:18px;margin-bottom:32px;text-align:center;">
@@ -1727,8 +1560,7 @@
       </div>
       <div id="statsMsg" class="note" role="status" aria-live="polite" style="display:none;"></div>
     </section>
-     -->
-
+    
     <!-- Enhanced Tutorials Section -->
     <section id="tutorials" class="section-box" aria-labelledby="tutorials-title">
       <h2 id="tutorials-title">Tutorials</h2>
@@ -1770,7 +1602,82 @@
         </div>
         <div class="modal-body" id="tutorialModalBody">
           <div class="note info">Loading comprehensive tutorial content...</div>
-        </div>
+        
+  <!-- Add Tutorial Modal -->
+  <div class="modal" id="addTutorialModal" aria-modal="true" role="dialog" aria-labelledby="addTutorialModalTitle">
+    <div class="modal-card">
+      <div class="modal-head">
+        <h3 id="addTutorialModalTitle">Add New Tutorial</h3>
+        <button class="modal-close" id="closeAddTutorial" aria-label="Close add tutorial">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="addTutorialForm">
+          <label for="tutTitle">Tutorial Title *</label>
+          <input id="tutTitle" type="text" placeholder="e.g., Smart Home Automation with ESP32" required>
+
+          <label for="tutCategory">Category *</label>
+          <select id="tutCategory" required>
+            <option value="">Select category</option>
+            <option value="sensor">Sensors</option>
+            <option value="automation">Automation</option>
+            <option value="ai-ml">AI/ML</option>
+            <option value="robotics">Robotics</option>
+            <option value="communication">Communication</option>
+            <option value="energy">Energy</option>
+          </select>
+
+          <label for="tutDifficulty">Difficulty Level *</label>
+          <select id="tutDifficulty" required>
+            <option value="">Select difficulty</option>
+            <option value="beginner">Beginner</option>
+            <option value="intermediate">Intermediate</option>
+            <option value="advanced">Advanced</option>
+          </select>
+
+          <div class="row">
+            <div>
+              <label for="tutAuthor">Author</label>
+              <input id="tutAuthor" type="text" placeholder="Your name">
+            </div>
+            <div>
+              <label for="tutTime">Estimated Time</label>
+              <input id="tutTime" type="text" placeholder="e.g., 2 hours">
+            </div>
+          </div>
+
+          <label for="tutLocation">Location (Optional)</label>
+          <input id="tutLocation" type="text" placeholder="e.g., Lab 101, IoT Workshop">
+
+          <label for="tutDescription">Description *</label>
+          <textarea id="tutDescription" rows="3" placeholder="Brief description of your tutorial..." required></textarea>
+
+          <label for="tutComponents">Required Components (comma-separated)</label>
+          <input id="tutComponents" type="text" placeholder="e.g., ESP32, DHT22 Sensor, Breadboard, LEDs">
+
+          <label for="tutCode">Arduino/Code Snippet *</label>
+          <textarea id="tutCode" rows="8" placeholder="Paste your code here..." required></textarea>
+
+          <label for="tutArchitecture">Architecture/Wiring Diagram URL (Optional)</label>
+          <input id="tutArchitecture" type="url" placeholder="https://example.com/wiring-diagram.png">
+
+          <label for="tutTags">Tags (comma-separated, optional)</label>
+          <input id="tutTags" type="text" placeholder="e.g., IoT, ESP32, Smart Home, Sensors">
+
+          <div class="actions">
+            <button type="button" class="btn" id="cancelAddTutorial">Cancel</button>
+            <button type="submit" class="btn primary" id="submitAddTutorial">
+              <span id="addTutBtnText">Submit Tutorial</span>
+              <span id="addTutBtnLoader" class="loading" style="display:none"></span>
+            </button>
+          </div>
+        </form>
+        <div id="addTutMsg" class="note" role="status" aria-live="polite" style="display:none"></div>
+      </div>
+    </div>
+  </div>
+
+
+  </div>
       </div>
     </div>
 
@@ -1806,52 +1713,33 @@
         <div id="galError" class="note error" role="alert" style="display:none;"></div>
       </div>
     </section>
-    
-    <!-- Stats Section
-<div class="stats-section">
-  <div class="stat-card">
-    <div class="stat-title">Active Learners</div>
-    <div class="stat-value">2,500</div>
-    <div class="stat-desc">Growing community of IoT enthusiasts</div>
-  </div>
-  <div class="stat-card">
-    <div class="stat-title">Expert Mentors</div>
-    <div class="stat-value">45</div>
-    <div class="stat-desc">Industry professionals guiding you</div>
-  </div>
-  <div class="stat-card">
-    <div class="stat-title">Community Partners</div>
-    <div class="stat-value">12</div>
-    <div class="stat-desc">Organizations supporting innovation</div>
-  </div>
-</div> -->
-<!-- Enhanced Community Stats Section-->
-    <section id="stats" class="section-box" aria-labelledby="stats-title">
-      <h2 id="stats-title"> Our Growing Community</h2>
-      
-      <div class="stats-grid" role="group" aria-label="Community statistics">
-        <div class="stat-card interactive-element" aria-live="polite">
-          <div class="stat-num" id="countLearners">0</div>
-          <div class="stat-label">Active Learners</div>
-        </div>
-        <div class="stat-card interactive-element" aria-live="polite">
-          <div class="stat-num" id="countMentors">0</div>
-          <div class="stat-label">Expert Mentors</div>
-        </div>
-        <div class="stat-card interactive-element" aria-live="polite">
-          <div class="stat-num" id="countPartners">0</div>
-          <div class="stat-label">Industry Partners</div>
-        </div>
-      </div>
-      <div id="statsMsg" class="note" role="status" aria-live="polite" style="display:none;"></div>
-    </section>
-  
+    <!-- Enhanced Notifications Section -->
+    <section id="notifications" class="section-box" aria-labelledby="notif-title">
+      <h2 id="notif-title"> Community Updates</h2>
+      <p style="color:var(--muted);font-size:18px;margin-bottom:24px;">
+        Stay connected with the latest events, workshops, competitions, and opportunities in our IoT community.
+      </p>
 
+      <div class="notice-tools" role="toolbar" aria-label="Notice filters">
+        <input id="noticeSearch" type="search" placeholder=" Search events, workshops, competitions..." aria-label="Search notices" />
+        <button class="chip active" data-cat="all" aria-pressed="true">All Updates</button>
+        <button class="chip" data-cat="event" aria-pressed="false"> Events</button>
+        <button class="chip" data-cat="workshop" aria-pressed="false"> Workshops</button>
+        <button class="chip" data-cat="competition" aria-pressed="false"> Competitions</button>
+        <button class="chip" data-today="true" aria-pressed="false"> Today</button>
+      </div>
+
+      <div class="notice-list" id="noticeList" aria-live="polite">
+        <div class="note info">Loading community updates...</div>
+      </div>
+      <div id="noticeError" class="note error" role="alert" style="display:none;"></div>
+      <div id="noticeHint" class="note info"><strong>Tip:</strong> Use the search and filters above to find specific events or topics that interest you.</div>
+    </section>
     
   </main>
 
   <!-- Enhanced Footer -->
-  <!-- <footer id="contact">
+  <footer id="contact">
     <div style="max-width:800px;margin:0 auto;">
       <strong style="font-size:24px;color:var(--brand-navy);"> Knowledge Garden</strong>
       <p style="margin:16px 0;font-size:18px;">EGS Pillay Engineering College</p>
@@ -1869,121 +1757,17 @@
         <a href="#tutorials" style="color:var(--brand-mag);text-decoration:none;font-weight:600;"> Tutorials</a>
         <a href="#notifications" style="color:var(--brand-mag);text-decoration:none;font-weight:600;"> Events</a>
         <a href="#gallery" style="color:var(--brand-mag);text-decoration:none;font-weight:600;"> Gallery</a>
-        <a href="admin.html" style="color:var(--brand-mag);text-decoration:none;font-weight:600;"> Admin</a>
+        <!-- <a href="admin.html" style="color:var(--brand-mag);text-decoration:none;font-weight:600;"> Admin</a> -->
       </div>
     </div>
     <small style="opacity:.75;margin-top:20px;display:block;">
       <span id="year"></span> Knowledge Garden • Built with for IoT Education
     </small>
-  </footer> -->
-
-  <footer>
-  <div class="footer-container">
-    <div class="footer-section">
-      <h3>About Knowledge Garden</h3>
-      <hr>
-      <p>We're a community-driven platform dedicated to making IoT education accessible to everyone through hands-on learning, mentorship, and collaboration.</p>
-      <!-- Social icons here -->
-    </div>
-    <div class="footer-section">
-      <h3>Quick Links</h3>
-      <hr>
-      <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Tutorials</a></li>
-        <li><a href="#">Gallery</a></li>
-        <li><a href="#">Updates</a></li>
-      </ul>
-    </div>
-    <div class="footer-section">
-      <h3>Resources</h3>
-      <hr>
-      <ul>
-        <li><a href="#">Documentation</a></li>
-        <li><a href="#">API Reference</a></li>
-        <li><a href="#">Community Forum</a></li>
-        <li><a href="#">Learning Paths</a></li>
-      </ul>
-    </div>
-    <div class="footer-section">
-      <h3>Contact Us</h3>
-      <hr>
-      <ul>
-        <li>📧 hello@knowledgegarden.io</li>
-        <li>📍 Tech Innovation Hub</li>
-        <li>🏢 San Francisco, CA</li>
-      </ul>
-    </div>
-    <!-- <div class="footer-section">
-      <h3>Learner Community</h3>
-      <hr>
-      <ul>
-        <li><a href="#">Join Our Discord</a></li>
-        <li><a href="#">Telegram Group</a></li>
-        <li><a href="#">WhatsApp Community</a></li>
-        <li><a href="#">Events & Meetups</a></li>
-      </ul>
-    </div> -->
-  </div>
-  <div class="footer-bottom">
-    © 2025 Knowledge Garden. All rights reserved. Empowering the next generation of IoT innovators.
-  </div>
-</footer>
+  </footer>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const API_BASE = window.API_BASE || 'https://iot-cloud-server-main.onrender.com';
-   
-  // ...existing code...
-
-  // HERO SLIDESHOW: Fetch images from gallery API
-  const imgEl = document.getElementById('heroSlideImg');
-  const dotsEl = document.getElementById('slideDots');
-  let heroImages = ['logo.jpeg']; // Always start with logo
-  let currentSlide = 0;
-  let slideInterval;
-
-  // Fetch gallery images and initialize slideshow
-  fetch('/api/gallery?limit=10')
-    .then(res => res.json())
-    .then(data => {
-      if (Array.isArray(data) && data.length) {
-        // Add gallery images after logo
-        heroImages = ['logo.jpeg', ...data.map(p => p.img).filter(Boolean)];
-      }
-      setupHeroSlideshow();
-    })
-    .catch(() => {
-      // Fallback: only logo
-      setupHeroSlideshow();
-    });
-
-  function setupHeroSlideshow() {
-    // Clear existing dots
-    dotsEl.innerHTML = '';
-    heroImages.forEach((_, idx) => {
-      const dot = document.createElement('div');
-      dot.className = 'slide-dot' + (idx === 0 ? ' active' : '');
-      dot.onclick = () => showSlide(idx);
-      dotsEl.appendChild(dot);
-    });
-    showSlide(0);
-    if (slideInterval) clearInterval(slideInterval);
-    slideInterval = setInterval(nextSlide, 2500);
-  }
-
-  function showSlide(idx) {
-    currentSlide = idx;
-    imgEl.src = heroImages[idx];
-    Array.from(dotsEl.children).forEach((dot, i) => {
-      dot.classList.toggle('active', i === idx);
-    });
-  }
-  function nextSlide() {
-    showSlide((currentSlide + 1) % heroImages.length);
-  }
-
-  // ...rest of your DOMContentLoaded code...
+      const API_BASE = window.API_BASE || '';
 
       // Enhanced navigation scroll effect
       const nav = document.getElementById('mainNav');
@@ -2197,7 +1981,7 @@
         if (noticeError) noticeError.style.display = 'none';
         
         if (!append) {
-          showLoading(noticeList, '📡 Loading community updates...');
+          showLoading(noticeList, 'Loading community updates...');
         }
 
         try {
@@ -2240,7 +2024,7 @@
               </div>
               <div>
                 <strong>${n.title}</strong>
-                <time datetime="${n.when}">${fmtDate(n.when)} ${n.venue ? `📍 ${n.venue}` : ''}</time>
+                 <time datetime="${n.when}">${fmtDate(n.when)} ${n.venue ? `${n.venue}` : ''}</time>
               </div>
               <button class="chip details-btn"
                 data-id="${n.id || n._id}"
@@ -2345,7 +2129,14 @@
         advanced: 'difficulty-advanced'
       })[d] || 'difficulty-beginner';
 
-     
+      // const categoryEmoji = c => ({
+      //   sensor: '📊',
+      //   communication: '📡',
+      //   automation: '🏠',
+      //   'ai-ml': '🤖',
+      //   robotics: '🦾',
+      //   energy: '⚡'
+      // })[c] || '🔧';
 
       function renderEmptyTutorials() {
         if (tutorialGrid) {
@@ -2365,7 +2156,7 @@
         if (tutorialError) tutorialError.style.display = 'none';
         
         if (!append) {
-          showLoading(tutorialGrid, ' Loading cutting-edge tutorials...');
+          showLoading(tutorialGrid, 'Loading cutting-edge tutorials...');
         }
 
         try {
@@ -2401,7 +2192,7 @@
               </div>
               
               <div class="tutorial-category">
-                ${categoryEmoji(t.category)} ${(t.category || 'sensor').replace('-', ' ').toUpperCase()}
+                ${(t.category || 'sensor').replace('-', ' ').toUpperCase()}
               </div>
               
               <p class="tutorial-desc">${(t.description || '').substring(0, 140)}${t.description?.length > 140 ? '...' : ''}</p>
@@ -2415,7 +2206,7 @@
               ${t.components?.length ? `
                 <div class="tutorial-components">
                   <strong style="font-size:13px;color:var(--muted);display:block;margin-bottom:8px;">
-                     Required Components:
+                    🔧 Required Components:
                   </strong>
                   <div class="component-list">
                     ${t.components.slice(0,4).map(c => `<span class="component-tag">${c}</span>`).join('')}
@@ -2668,7 +2459,7 @@
                 </div>
                 
                 <div class="tutorial-category">
-                  ${categoryEmoji(t.category)} ${(t.category || 'sensor').replace('-', ' ').toUpperCase()}
+                ${(t.category || 'sensor').replace('-', ' ').toUpperCase()}
                 </div>
                 
                 <p class="tutorial-desc">${(t.description || '').substring(0, 140)}${t.description?.length > 140 ? '...' : ''}</p>
@@ -2682,7 +2473,7 @@
                 ${t.components?.length ? `
                   <div class="tutorial-components">
                     <strong style="font-size:13px;color:var(--muted);display:block;margin-bottom:8px;">
-                       Required Components:
+                      Required Components:
                     </strong>
                     <div class="component-list">
                       ${t.components.slice(0,4).map(c => `<span class="component-tag">${c}</span>`).join('')}
@@ -2794,6 +2585,129 @@
             b.classList.remove('active');
             b.setAttribute('aria-pressed', 'false');
           });
+
+
+    // ============================================
+    // ADD TUTORIAL FUNCTIONALITY
+    // ============================================
+    const addTutorialModal = document.getElementById('addTutorialModal');
+    const openAddTutorial = document.getElementById('openAddTutorial');
+    const closeAddTutorial = document.getElementById('closeAddTutorial');
+    const cancelAddTutorial = document.getElementById('cancelAddTutorial');
+    const addTutorialForm = document.getElementById('addTutorialForm');
+    const submitAddTutorial = document.getElementById('submitAddTutorial');
+    const addTutMsg = document.getElementById('addTutMsg');
+    const addTutBtnText = document.getElementById('addTutBtnText');
+    const addTutBtnLoader = document.getElementById('addTutBtnLoader');
+
+    // Form elements
+    const tutTitle = document.getElementById('tutTitle');
+    const tutCategory = document.getElementById('tutCategory');
+    const tutDifficulty = document.getElementById('tutDifficulty');
+    const tutAuthor = document.getElementById('tutAuthor');
+    const tutTime = document.getElementById('tutTime');
+    const tutLocation = document.getElementById('tutLocation');
+    const tutDescription = document.getElementById('tutDescription');
+    const tutComponents = document.getElementById('tutComponents');
+    const tutCode = document.getElementById('tutCode');
+    const tutArchitecture = document.getElementById('tutArchitecture');
+    const tutTags = document.getElementById('tutTags');
+
+    // Open Add Tutorial Modal
+    openAddTutorial?.addEventListener('click', () => {
+      resetAddTutorialForm();
+      openModal(addTutorialModal, tutTitle);
+    });
+
+    // Close Add Tutorial Modal
+    [closeAddTutorial, cancelAddTutorial].forEach(btn => {
+      btn?.addEventListener('click', () => {
+        addTutorialModal?.classList.remove('open');
+      });
+    });
+
+    // Submit Tutorial Form
+    addTutorialForm?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      // Validate form
+      if (!tutTitle?.value.trim() || !tutCategory?.value || !tutDifficulty?.value || 
+          !tutDescription?.value.trim() || !tutCode?.value.trim()) {
+        showAddTutMessage('Please fill in all required fields (*)', 'error');
+        return;
+      }
+
+      setAddTutLoading(true);
+      showAddTutMessage('Submitting your tutorial to MongoDB...', 'info');
+
+      try {
+        // Prepare tutorial data
+        const tutorialData = {
+          title: tutTitle.value.trim(),
+          category: tutCategory.value,
+          difficulty: tutDifficulty.value,
+          author: tutAuthor?.value.trim() || 'Knowledge Garden Team',
+          estimatedTime: tutTime?.value.trim() || '30 minutes',
+          location: tutLocation?.value.trim() || '',
+          description: tutDescription.value.trim(),
+          components: tutComponents?.value ? tutComponents.value.split(',').map(c => c.trim()).filter(c => c) : [],
+          codeSnippet: tutCode.value.trim(),
+          architecture: tutArchitecture?.value.trim() || '',
+          tags: tutTags?.value ? tutTags.value.split(',').map(t => t.trim()).filter(t => t) : []
+        };
+
+        // Send POST request to MongoDB API
+        const response = await postJSON('api/tutorials', tutorialData);
+
+        showAddTutMessage('✅ Tutorial successfully added to MongoDB! Refreshing list...', 'success');
+
+        // Refresh tutorials list
+        setTimeout(() => {
+          addTutorialModal?.classList.remove('open');
+          resetAddTutorialForm();
+          tFilters.page = 1;
+          loadTutorials(); // Reload tutorials to show the new one
+        }, 1500);
+
+      } catch (error) {
+        console.error('Failed to add tutorial:', error);
+        showAddTutMessage(`❌ Failed to save tutorial: ${error.message}. Please check your MongoDB connection.`, 'error');
+      } finally {
+        setAddTutLoading(false);
+      }
+    });
+
+    // Helper functions for Add Tutorial
+    function showAddTutMessage(message, type = 'info') {
+      if (!addTutMsg) return;
+      addTutMsg.className = `note ${type}`;
+      addTutMsg.textContent = message;
+      addTutMsg.style.display = 'block';
+    }
+
+    function hideAddTutMessage() {
+      if (addTutMsg) addTutMsg.style.display = 'none';
+    }
+
+    function setAddTutLoading(loading) {
+      if (!submitAddTutorial || !addTutBtnText || !addTutBtnLoader) return;
+      if (loading) {
+        submitAddTutorial.disabled = true;
+        addTutBtnText.style.display = 'none';
+        addTutBtnLoader.style.display = 'inline-block';
+      } else {
+        submitAddTutorial.disabled = false;
+        addTutBtnText.style.display = 'inline';
+        addTutBtnLoader.style.display = 'none';
+      }
+    }
+
+    function resetAddTutorialForm() {
+      addTutorialForm?.reset();
+      hideAddTutMessage();
+    }
+
+
           
           btn.classList.add('active');
           btn.setAttribute('aria-pressed', 'true');
@@ -2818,7 +2732,7 @@
           const componentsSection = tutorial.components?.length ? `
             <div style="margin-bottom:28px;">
               <h4 style="margin-bottom:12px;color:var(--brand-navy);display:flex;align-items:center;gap:8px;">
-                 Required Components & Hardware
+                🔧 Required Components & Hardware
               </h4>
               <div class="component-list">
                 ${tutorial.components.map(c => `<span class="component-tag">${c}</span>`).join('')}
@@ -2859,7 +2773,7 @@
                   ${(tutorial.difficulty || 'beginner').toUpperCase()}
                 </span>
                 <span style="font-size:14px;color:var(--muted);display:flex;align-items:center;gap:4px;">
-                  ${categoryEmoji(tutorial.category)} ${(tutorial.category || 'sensor').replace('-', ' ').toUpperCase()}
+                  ${(tutorial.category || 'sensor').replace('-', ' ').toUpperCase()}
                 </span>
                 <span style="font-size:14px;color:var(--muted);display:flex;align-items:center;gap:4px;">
                    ${tutorial.estimatedTime || '30 minutes'}
@@ -2877,7 +2791,7 @@
             
             <div style="margin-bottom:28px;">
               <h4 style="margin-bottom:12px;color:var(--brand-navy);display:flex;align-items:center;gap:8px;">
-                💻 Complete Source Code
+                Complete Source Code
               </h4>
               <div class="note warning" style="margin-bottom:12px;">
                 <strong> Before You Start:</strong> Make sure to install required libraries and verify your board settings in Arduino IDE.
@@ -3358,7 +3272,7 @@
                 </div>
                 <div>
                   <h4 style="margin: 0 0 8px 0; color: var(--brand-navy); display: flex; align-items: center; gap: 8px;">
-                     Technology Track
+                    🔧 Technology Track
                   </h4>
                   <div style="background: #f8fafc; padding: 12px; border-radius: 8px; border-left: 4px solid var(--brand-mag);">
                     <p style="margin: 0; font-weight: 600; color: var(--brand-navy);">
