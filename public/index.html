@@ -18,6 +18,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <script>window.API_BASE='';</script>
   <style>
     :root{ 
@@ -1753,14 +1754,34 @@
         </p>
       </div>
       
-      <div style="margin-top:20px;display:flex;justify-content:center;gap:16px;flex-wrap:wrap;" aria-label="Quick links">
-        <a href="#tutorials" style="color:var(--brand-mag);text-decoration:none;font-weight:600;"> Tutorials</a>
-        <a href="#notifications" style="color:var(--brand-mag);text-decoration:none;font-weight:600;"> Events</a>
-        <a href="#gallery" style="color:var(--brand-mag);text-decoration:none;font-weight:600;"> Gallery</a>
-        <!-- <a href="admin.html" style="color:var(--brand-mag);text-decoration:none;font-weight:600;"> Admin</a> -->
-      </div>
+      
+    
+          <!-- ... existing code ... -->
     </div>
-    <small style="opacity:.75;margin-top:20px;display:block;">
+        <div class="social-icons" style="margin-top: 20px; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+      <a href="mailto:contact@knowledgegarden.edu" target="_blank" style="color: #fff; font-size: 24px; text-decoration: none;" aria-label="Email">
+        <i class="fas fa-envelope"></i>
+      </a>
+      <a href="https://github.com" target="_blank" style="color: linear-gradient(135deg, var(--brand-mag), var(--brand-navy));; font-size: 24px; text-decoration: none;" aria-label="GitHub">
+        <i class="fab fa-github"></i>
+      </a>
+      <a href="https://linkedin.com" target="_blank" style="color: linear-gradient(135deg, var(--brand-mag), var(--brand-navy));; font-size: 24px; text-decoration: none;" aria-label="LinkedIn">
+        <i class="fab fa-linkedin-in"></i>
+      </a>
+      <a href="https://knowledgegarden.edu" target="_blank" style="color: linear-gradient(135deg, var(--brand-mag), var(--brand-navy));; font-size: 24px; text-decoration: none;" aria-label="Website">
+        <i class="fas fa-globe"></i>
+      </a>
+      <a href="https://instagram.com" target="_blank" style="color: linear-gradient(135deg, var(--brand-mag), var(--brand-navy));; font-size: 24px; text-decoration: none;" aria-label="Instagram">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="https://youtube.com" target="_blank" style="color: linear-gradient(135deg, var(--brand-mag), var(--brand-navy));; font-size: 24px; text-decoration: none;" aria-label="YouTube">
+        <i class="fab fa-youtube"></i>
+      </a>
+      <a href="https://t.me" target="_blank" style="color: linear-gradient(135deg, var(--brand-mag), var(--brand-navy));; font-size: 24px; text-decoration: none;" aria-label="Telegram">
+        <i class="fab fa-telegram-plane"></i>
+      </a>
+    </div>
+    <small style="opacity:.75;margin-top:20px;display:block;text-align:center;">
       <span id="year"></span> Knowledge Garden • Built with for IoT Education
     </small>
   </footer>
@@ -2206,7 +2227,7 @@
               ${t.components?.length ? `
                 <div class="tutorial-components">
                   <strong style="font-size:13px;color:var(--muted);display:block;margin-bottom:8px;">
-                    🔧 Required Components:
+                     Required Components:
                   </strong>
                   <div class="component-list">
                     ${t.components.slice(0,4).map(c => `<span class="component-tag">${c}</span>`).join('')}
@@ -2732,7 +2753,7 @@
           const componentsSection = tutorial.components?.length ? `
             <div style="margin-bottom:28px;">
               <h4 style="margin-bottom:12px;color:var(--brand-navy);display:flex;align-items:center;gap:8px;">
-                🔧 Required Components & Hardware
+                 Required Components & Hardware
               </h4>
               <div class="component-list">
                 ${tutorial.components.map(c => `<span class="component-tag">${c}</span>`).join('')}
@@ -3272,7 +3293,7 @@
                 </div>
                 <div>
                   <h4 style="margin: 0 0 8px 0; color: var(--brand-navy); display: flex; align-items: center; gap: 8px;">
-                    🔧 Technology Track
+                    Technology Track
                   </h4>
                   <div style="background: #f8fafc; padding: 12px; border-radius: 8px; border-left: 4px solid var(--brand-mag);">
                     <p style="margin: 0; font-weight: 600; color: var(--brand-navy);">

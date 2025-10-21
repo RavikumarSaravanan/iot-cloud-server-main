@@ -12,6 +12,7 @@
         ]
       }
     ],
-    "meta-charset-utf-8": "off"
+    "meta-charset-utf-8": "off",
+    "disown-opener": "off"
   }
 }

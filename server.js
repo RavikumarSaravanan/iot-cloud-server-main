@@ -1,4 +1,3 @@
-// server.js
 import fs from 'fs';
 import http from 'http';
 import https from 'https';
@@ -17,8 +16,13 @@ import { apiLimiter } from './middleware/rateLimit.js';
 import authRoutes from './routes/auth.js';
 import notifRoutes from './routes/notifications.js';
 import projectRoutes from './routes/projects.js';
-import tutorialRoutes from './routes/tutorials.js';
+import tutorialRoutes from './routes/tutorial.js';
 import publicRoutes from './routes/public.js';
+// New routes
+import userRoutes from './routes/users.js';
+import learningPathRoutes from './routes/learningPaths.js';
+import forumRoutes from './routes/forum.js';
+
 
 // Environment setup
 dotenv.config();
@@ -78,6 +82,9 @@ app.use('/api/auth', authRoutes);
 app.use('/api/notifications', notifRoutes);
 app.use('/api/projects', projectRoutes);
 app.use('/api/tutorials', tutorialRoutes);
+app.use('/api/users', userRoutes);
+app.use('/api/paths', learningPathRoutes);
+app.use('/api/forum', forumRoutes);
 app.use('/api', publicRoutes);
 console.log('[routes] Tutorial routes loaded'); 
 // ------------ ADMIN BOOTSTRAP ------------

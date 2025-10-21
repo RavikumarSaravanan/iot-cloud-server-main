@@ -19,8 +19,6 @@ openssl req -x509 -nodes -days 365 -newkey rsa:4096 \  -keyout certs/selfsigned.
 # 4) Run
 npm start
 # HTTPS on 3443, HTTP redirect on 3000
-```
-
 ## API Overview
 
 - `POST /api/auth/register` — {email, password}
@@ -139,24 +137,4 @@ sudo systemctl enable --now kg
 ```)
 "# iot-cloud-server-main" 
 
-
--------
-
-app.use(cors({
-  origin: process.env.CORS_ORIGIN,
-  credentials: true
-}));
-
-CORS_ORIGIN=https://knowledgegarden-egs.netlify.app,http://localhost:3000
-const API_BASE = window.API_BASE || '';app.use(cors({
-  origin: process.env.CORS_ORIGIN,
-  credentials: true
-}));
-const API_BASE = window.location.origin;
-<script>
-  window.API_BASE = '';
-</script>
-/admin     /admin.html    200
-/login     /login.html    200
-/*         /index.html    200
 
